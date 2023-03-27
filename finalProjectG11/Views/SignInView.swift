@@ -16,6 +16,7 @@ struct SignInView: View {
     @State private var password : String = ""
     @State private var selection : Int? = nil
     @State private var homeSelection : Int? = nil
+    @State private var invalidUserCredAlert:Bool = false
     
     @Binding var rootScreen : RootView
 //    
@@ -45,7 +46,16 @@ struct SignInView: View {
                     Button(action: {
                         //validate the data
                         if (!self.email.isEmpty && !self.password.isEmpty){
-                            self.fireAuthHelper.signIn(email: self.email, password: self.password)
+                            self.fireAuthHelper.signIn(email: self.email, password: self.password){ isSignedIn in
+                                if isSignedIn {
+                                    // The sign-in was successful, so handle it here
+                                    self.rootScreen = .Content
+                                } else {
+                                    // The sign-in was not successful, so handle it here
+                                    print("Sign in failed.")
+                                    invalidUserCredAlert = true
+                                }
+                            }
                             
                             
                             //navigate to home screen
@@ -65,7 +75,8 @@ struct SignInView: View {
                     
                     Button(action: {
                         //take the user to signup screen
-                        self.selection = 2
+//                        self.selection = 2
+                        self.rootScreen = .Signup
                     }){
                         Text("Sign Up")
                             .font(.title2)
@@ -77,10 +88,16 @@ struct SignInView: View {
                 }//LazyVGrid ends
 
                 Spacer()
+                    .navigationTitle("Sign In")
             }//VStack ends
             .onAppear{
-                self.email = UserDefaults.standard.string(forKey: "KEY_EMAIL") ?? ""
-                self.password = UserDefaults.standard.string(forKey: "KEY_PASSWORD") ?? ""
+                let credArray:[String]? = self.fireAuthHelper.isUserLoggedIn()
+                self.email = credArray?[0] ?? ""
+                self.password = credArray?[1] ?? ""
             }
+            .alert(isPresented: self.$invalidUserCredAlert){
+                Alert(title: Text("Invalid!"), message: Text("Invalid email or password"), dismissButton: .default(Text("Try Again!")))
+            }
+            
     }//body ends
 }

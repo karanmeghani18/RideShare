@@ -17,7 +17,9 @@ class FireAuthHelper: ObservableObject{
                 return
             }
             
-            self.user = user
+            self.user = User(
+                id: user!.uid, userName: user!.displayName ?? "", profilePhotoUrl: "ProfilePhoto", email: user!.email ?? ""
+            )
         }
     }
     
@@ -37,7 +39,9 @@ class FireAuthHelper: ObservableObject{
                 print(#function, "Unable to create the account")
             case .some(_):
                 print(#function, "Successfully created user account")
-                self.user = authResult?.user
+                self.user = User(
+                    id: result.user.uid, userName: result.user.displayName ?? "", profilePhotoUrl: "ProfilePhoto", email: result.user.email ?? ""
+                )
                 
                 UserDefaults.standard.set(self.user?.email, forKey: "KEY_EMAIL")
                 UserDefaults.standard.set(password, forKey: "KEY_PASSWORD")
@@ -46,11 +50,23 @@ class FireAuthHelper: ObservableObject{
         }
     }
     
-    func signIn(email : String, password : String){
+    func isUserLoggedIn() -> [String]?{
+        let email = UserDefaults.standard.string(forKey: "KEY_EMAIL") ?? ""
+        let password = UserDefaults.standard.string(forKey: "KEY_PASSWORD") ?? ""
+        if(email != "" && password != ""){
+            return [email,password]
+        }
+        return nil
+    }
+    
+    func signIn(email : String, password : String, completion: @escaping (Bool) -> Void){
+        var isSignedIn = false
+        
         Auth.auth().signIn(withEmail : email, password: password){ [self] authResult, error in
             
             guard let result = authResult else{
                 print(#function, "Error while signing in the user : \(error)")
+                completion(isSignedIn)
                 return
             }
             
@@ -61,15 +77,23 @@ class FireAuthHelper: ObservableObject{
                 print(#function, "Unable to find the user account")
             case .some(_):
                 print(#function, "Login Successful")
-                self.user = authResult?.user
+                self.user = User(
+                    id: result.user.uid, userName: result.user.displayName ?? "", profilePhotoUrl: "ProfilePhoto", email: result.user.email ?? ""
+                )
                 
-                print(#function, "Welcome \(self.user?.displayName ?? "NA")")
+                print(#function, "Welcome \(self.user?.userName ?? "NA")")
                 
-                UserDefaults.standard.set(user?.email, forKey: "KEY_EMAIL")
+                UserDefaults.standard.set(self.user?.email, forKey: "KEY_EMAIL")
                 UserDefaults.standard.set(password, forKey: "KEY_PASSWORD")
+                isSignedIn = true
+                
             }
             
+            completion(isSignedIn)
+            
+            
         }
+        
     }
     
     func signOut(){

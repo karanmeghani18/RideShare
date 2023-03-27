@@ -12,9 +12,13 @@ struct ContentView: View {
     var body: some View {
         VStack{
             TabView{
-                HomeView()
+                FindRidesView()
                     .tabItem{
-                        Label("Home",systemImage: "house")
+                        Label("Find",systemImage: "magnifyingglass")
+                    }
+                AccountView()
+                    .tabItem{
+                        Label("Account",systemImage: "person.crop.circle")
                     }
             }
         }

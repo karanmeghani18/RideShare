@@ -30,8 +30,16 @@
 		800E7FF629CE878E008E3790 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FF529CE878E008E3790 /* MainView.swift */; };
 		800E7FF829CE87B7008E3790 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FF729CE87B7008E3790 /* RootView.swift */; };
 		800E7FFA29CE894A008E3790 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FF929CE894A008E3790 /* SignInView.swift */; };
-		800E7FFC29CE89DF008E3790 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FFB29CE89DF008E3790 /* HomeView.swift */; };
+		800E7FFC29CE89DF008E3790 /* FindRidesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FFB29CE89DF008E3790 /* FindRidesView.swift */; };
 		800E7FFE29CE9103008E3790 /* FIreAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FFD29CE9103008E3790 /* FIreAuthHelper.swift */; };
+		8FE28C5329D127DF00A3FDEC /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5229D127DF00A3FDEC /* AccountView.swift */; };
+		8FE28C5629D1478100A3FDEC /* CustomAccountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5529D1478100A3FDEC /* CustomAccountButton.swift */; };
+		8FE28C5829D1493B00A3FDEC /* TripsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5729D1493B00A3FDEC /* TripsListView.swift */; };
+		8FE28C5A29D1574B00A3FDEC /* TripItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5929D1574B00A3FDEC /* TripItemView.swift */; };
+		8FE28C5C29D15B4700A3FDEC /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5B29D15B4700A3FDEC /* TripDetailView.swift */; };
+		8FE28C5E29D15F9700A3FDEC /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5D29D15F9700A3FDEC /* Trip.swift */; };
+		8FE28C6029D15FC800A3FDEC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5F29D15FC800A3FDEC /* User.swift */; };
+		8FE28C6229D162CB00A3FDEC /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C6129D162CB00A3FDEC /* Car.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +53,16 @@
 		800E7FF529CE878E008E3790 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		800E7FF729CE87B7008E3790 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		800E7FF929CE894A008E3790 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
-		800E7FFB29CE89DF008E3790 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		800E7FFB29CE89DF008E3790 /* FindRidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindRidesView.swift; sourceTree = "<group>"; };
 		800E7FFD29CE9103008E3790 /* FIreAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIreAuthHelper.swift; sourceTree = "<group>"; };
+		8FE28C5229D127DF00A3FDEC /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		8FE28C5529D1478100A3FDEC /* CustomAccountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAccountButton.swift; sourceTree = "<group>"; };
+		8FE28C5729D1493B00A3FDEC /* TripsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsListView.swift; sourceTree = "<group>"; };
+		8FE28C5929D1574B00A3FDEC /* TripItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripItemView.swift; sourceTree = "<group>"; };
+		8FE28C5B29D15B4700A3FDEC /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
+		8FE28C5D29D15F9700A3FDEC /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		8FE28C5F29D15FC800A3FDEC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8FE28C6129D162CB00A3FDEC /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,11 +132,15 @@
 		800E7FE829CE64FA008E3790 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8FE28C5429D1475000A3FDEC /* CustomViews */,
 				800E7FC329CE63D8008E3790 /* ContentView.swift */,
 				800E7FEB29CE6577008E3790 /* SignUpView.swift */,
 				800E7FF529CE878E008E3790 /* MainView.swift */,
 				800E7FF929CE894A008E3790 /* SignInView.swift */,
-				800E7FFB29CE89DF008E3790 /* HomeView.swift */,
+				800E7FFB29CE89DF008E3790 /* FindRidesView.swift */,
+				8FE28C5229D127DF00A3FDEC /* AccountView.swift */,
+				8FE28C5729D1493B00A3FDEC /* TripsListView.swift */,
+				8FE28C5B29D15B4700A3FDEC /* TripDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -129,6 +149,9 @@
 			isa = PBXGroup;
 			children = (
 				800E7FF729CE87B7008E3790 /* RootView.swift */,
+				8FE28C5D29D15F9700A3FDEC /* Trip.swift */,
+				8FE28C5F29D15FC800A3FDEC /* User.swift */,
+				8FE28C6129D162CB00A3FDEC /* Car.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -146,6 +169,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8FE28C5429D1475000A3FDEC /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				8FE28C5529D1478100A3FDEC /* CustomAccountButton.swift */,
+				8FE28C5929D1574B00A3FDEC /* TripItemView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,12 +272,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				800E7FFA29CE894A008E3790 /* SignInView.swift in Sources */,
-				800E7FFC29CE89DF008E3790 /* HomeView.swift in Sources */,
+				800E7FFC29CE89DF008E3790 /* FindRidesView.swift in Sources */,
 				800E7FC429CE63D8008E3790 /* ContentView.swift in Sources */,
+				8FE28C5C29D15B4700A3FDEC /* TripDetailView.swift in Sources */,
+				8FE28C5829D1493B00A3FDEC /* TripsListView.swift in Sources */,
+				8FE28C6229D162CB00A3FDEC /* Car.swift in Sources */,
 				800E7FF629CE878E008E3790 /* MainView.swift in Sources */,
+				8FE28C5629D1478100A3FDEC /* CustomAccountButton.swift in Sources */,
 				800E7FEC29CE6577008E3790 /* SignUpView.swift in Sources */,
+				8FE28C6029D15FC800A3FDEC /* User.swift in Sources */,
 				800E7FC229CE63D8008E3790 /* finalProjectG11App.swift in Sources */,
+				8FE28C5329D127DF00A3FDEC /* AccountView.swift in Sources */,
 				800E7FF829CE87B7008E3790 /* RootView.swift in Sources */,
+				8FE28C5A29D1574B00A3FDEC /* TripItemView.swift in Sources */,
+				8FE28C5E29D15F9700A3FDEC /* Trip.swift in Sources */,
 				800E7FFE29CE9103008E3790 /* FIreAuthHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,14 +415,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"finalProjectG11/Preview Content\"";
-				DEVELOPMENT_TEAM = 5JR7YDT8GA;
+				DEVELOPMENT_TEAM = 8CWU8JJACZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ride Share";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -404,14 +446,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"finalProjectG11/Preview Content\"";
-				DEVELOPMENT_TEAM = 5JR7YDT8GA;
+				DEVELOPMENT_TEAM = 8CWU8JJACZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ride Share";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
