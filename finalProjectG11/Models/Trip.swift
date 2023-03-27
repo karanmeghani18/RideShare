@@ -11,7 +11,6 @@ import FirebaseFirestoreSwift
 struct Trip : Codable, Hashable, Equatable, Identifiable{
     var id : String? = UUID().uuidString
     var user : User = User()
-    var car : Car = Car()
     var origin: String = ""
     var destination: String = ""
     var distance: Double = 0.0
@@ -20,7 +19,6 @@ struct Trip : Codable, Hashable, Equatable, Identifiable{
     
     //pre-defined members
     private static var fUser:String = "tUser"
-    private static var fCar:String = "tCar"
     private static var forigin:String = "torigin"
     private static var fdestination:String = "tdestinatiom"
     private static var fdistance:String = "tdistance"
@@ -31,11 +29,10 @@ struct Trip : Codable, Hashable, Equatable, Identifiable{
 
     }
     
-    init(id: String? = nil, user: User, car: Car, origin: String, destination: String, distance: Double, fare: Double, travelTime: Double) {
+    init(id: String? = nil, user: User, origin: String, destination: String, distance: Double, fare: Double, travelTime: Double) {
         self.id = id
         self.user = user
         self.origin = origin
-        self.car = car
         self.destination = destination
         self.distance = distance
         self.fare = fare
@@ -44,11 +41,6 @@ struct Trip : Codable, Hashable, Equatable, Identifiable{
    
     
     init?(dictionary : [String : Any]){
-
-        guard let tCar = dictionary[Trip.fCar] as? Car else {
-            print(#function, "Unable to read car from the object")
-            return nil
-        }
 
         guard let tUser = dictionary[Trip.fUser] as? User else {
             print(#function, "Unable to read user from the object")
@@ -80,7 +72,7 @@ struct Trip : Codable, Hashable, Equatable, Identifiable{
             return nil
         }
 
-        self.init(user: tUser, car: tCar, origin: tOrigin, destination: tDestination, distance: tDistance, fare: tFare, travelTime: tTravelTime)
+        self.init(user: tUser, origin: tOrigin, destination: tDestination, distance: tDistance, fare: tFare, travelTime: tTravelTime)
     }
 
 }

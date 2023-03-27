@@ -12,6 +12,10 @@ struct ContentView: View {
     var body: some View {
         VStack{
             TabView{
+                CreateTripView()
+                    .tabItem{
+                        Label("Create",systemImage: "plus.circle")
+                    }
                 FindRidesView()
                     .tabItem{
                         Label("Find",systemImage: "magnifyingglass")

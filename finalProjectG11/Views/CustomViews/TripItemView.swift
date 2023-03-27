@@ -29,12 +29,12 @@ struct TripItemView:View {
                         .foregroundColor(Color.black)
                         .frame(alignment: .leading)
                         .padding(.bottom, 2)
-                    Text("Availabel Seats: \(self.trip.car.availableSeats)")
+                    Text("Availabel Seats: \(self.trip.user.car!.availableSeats)")
                         .foregroundColor(Color.gray)
                 }
                 Spacer()
                 VStack(alignment: .trailing){
-                    Text("\(self.trip.car.totalSeats) Seats")
+                    Text("\(self.trip.user.car!.totalSeats) Seats")
                         .foregroundColor(Color.black)
                         .frame(alignment: .leading)
                         .padding(.bottom, 2)

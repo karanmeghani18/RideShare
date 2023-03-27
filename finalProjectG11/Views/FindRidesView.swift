@@ -14,7 +14,7 @@ struct FindRidesView: View {
     var body: some View {
         NavigationView{
             VStack{
-                NavigationLink(destination: TripsListView(), tag: 1, selection: self.$tripsListSelection){}
+                NavigationLink(destination: TripsListView(), tag: 1, selection: self.$tripsListSelection){}.hidden()
                 TextField("Origin", text: self.$originText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .disableAutocorrection(true)
@@ -36,8 +36,10 @@ struct FindRidesView: View {
             }.padding()
                 .navigationTitle("Find A Ride!")
         }
+       
         
     }
+    
 }
 
 struct HomeView_Previews: PreviewProvider {

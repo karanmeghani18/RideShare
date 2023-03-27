@@ -13,21 +13,24 @@ struct User : Codable, Hashable {
     var userName : String = ""
     var profilePhotoUrl : String = ""
     var email : String = ""
+    var car: Car?
     
     //pre-defined members
     private static let fUserName:String = "uUserName"
     private static let fProfilePhotoUrl:String = "uProfilePhotoUrl"
     private static let fEmail:String = "uEmail"
+    private static let fCar:String = "uCar"
     
     init(){
 
     }
     
-    init(id: String? = nil, userName: String, profilePhotoUrl: String, email: String) {
+    init(id: String? = nil, userName: String, profilePhotoUrl: String, email: String, car: Car? = nil) {
         self.id = id
         self.userName = userName
         self.profilePhotoUrl = profilePhotoUrl
         self.email = email
+        self.car = car
     }
     
     init?(dictionary : [AnyHashable : Any]){
@@ -47,13 +50,20 @@ struct User : Codable, Hashable {
             print(#function, "Unable to read Email from the object")
             return nil
         }
+        
+        guard let ucar = dictionary[User.fCar] as? Car else{
+            print(#function, "Unable to read car from the object")
+            return nil
+        }
 
-        self.init(userName: name, profilePhotoUrl: photoUrl, email: uemail)
+        self.init(userName: name, profilePhotoUrl: photoUrl, email: uemail, car: ucar)
     }
     
     func toDict() -> [String : Any] {
         return [User.fUserName : self.userName,
                 User.fProfilePhotoUrl: self.profilePhotoUrl,
-                User.fEmail : self.email]
+                User.fEmail : self.email,
+                User.fCar : self.car ?? "",
+        ]
     }
 }

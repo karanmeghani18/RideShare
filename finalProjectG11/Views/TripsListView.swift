@@ -10,16 +10,18 @@ import SwiftUI
 struct TripsListView: View {
     @State private var tripDetailSelection: Int? = nil
     @State private var tripsList:[Trip] = []
+    @State private var selectedTrip:Trip = Trip()
     var body: some View {
-        
+        NavigationLink(destination: TripDetailView(trip: selectedTrip), tag: 1, selection: self.$tripDetailSelection ){}.hidden()
         NavigationView{
             VStack{
-                NavigationLink(destination: TripDetailView(), tag: 1, selection: self.$tripDetailSelection ){}.hidden()
+                
                 List{
-                    ForEach(self.$tripsList) { trip1 in
-                       
-                        TripItemView(trip: trip1.wrappedValue,
-                                     onTap: navigateToDetail)
+                    ForEach(self.$tripsList) { trip in
+                        TripItemView(trip: trip.wrappedValue,
+                                     onTap: {
+                            navigateToDetail(trip: trip.wrappedValue)
+                        })
                     }
                     
                 }
@@ -29,26 +31,27 @@ struct TripsListView: View {
                     
             }
             .onAppear(perform: {
-                let user:User = User(userName: "Om C.", profilePhotoUrl: "ProfilePhoto", email: "omchevli@gmail.com")
+                
                 let carForTrip:Car = Car(id: UUID().uuidString, modelName: "Model X", companyName: "Tesla", yearOfManufacture: 2019, availableSeats: 5, totalSeats: 6, maxLuggage: 3, availableLuggae: 2)
                 
+                let user:User = User(userName: "Om C.", profilePhotoUrl: "ProfilePhoto", email: "omchevli@gmail.com", car: carForTrip)
+                
                 self.tripsList = [
-                    Trip(id: UUID().uuidString, user: user, car: carForTrip, origin: "", destination:"", distance:0.0, fare: 29.2, travelTime: 2.4),
-                    Trip(id: UUID().uuidString, user: user, car:carForTrip, origin: "", destination:"", distance:0.0, fare: 19.92, travelTime: 2.4),
-                    Trip(id: UUID().uuidString, user: user, car: carForTrip, origin: "", destination:"", distance:0.0, fare: 40.7, travelTime: 2.4),
-                    Trip(id: UUID().uuidString, user: user, car: carForTrip, origin: "", destination:"", distance:0.0, fare: 29.2, travelTime: 2.4),
-                    Trip(id: UUID().uuidString,user: user, car: carForTrip, origin: "", destination:"", distance:0.0, fare: 29.2, travelTime: 2.4),
+                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4),
+                    Trip(id: UUID().uuidString, user: user, origin: "", destination:"Brampton, ON", distance:0.0, fare: 19.92, travelTime: 2.4),
+                    Trip(id: UUID().uuidString, user: user, origin: "", destination:"", distance:0.0, fare: 40.7, travelTime: 2.4),
+                    Trip(id: UUID().uuidString, user: user, origin: "", destination:"", distance:0.0, fare: 29.2, travelTime: 2.4),
+                    Trip(id: UUID().uuidString,user: user, origin: "", destination:"", distance:0.0, fare: 29.2, travelTime: 2.4),
                     
                 ]
-                print("hrrh \(carForTrip.availableSeats)")
-                print("hh \(tripsList[0].car.availableSeats)")
             })
         }
         .navigationTitle("Trips")
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    func navigateToDetail() {
+    func navigateToDetail(trip: Trip) {
+        selectedTrip = trip
         self.tripDetailSelection = 1
     }
 }
