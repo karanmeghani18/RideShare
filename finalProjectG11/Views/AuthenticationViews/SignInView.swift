@@ -11,6 +11,7 @@ import FirebaseFirestore
 struct SignInView: View {
     
     @EnvironmentObject var fireAuthHelper : FireAuthHelper
+    @EnvironmentObject var fireDBHelper : FireDBHelper
     
     @State private var email : String = ""
     @State private var password : String = ""
@@ -49,7 +50,10 @@ struct SignInView: View {
                             self.fireAuthHelper.signIn(email: self.email, password: self.password){ isSignedIn in
                                 if isSignedIn {
                                     // The sign-in was successful, so handle it here
-                                    self.rootScreen = .Content
+                                    fireDBHelper.getUserProfile{
+                                        profile in self.rootScreen = .Content
+                                    }
+                                    
                                 } else {
                                     // The sign-in was not successful, so handle it here
                                     print("Sign in failed.")

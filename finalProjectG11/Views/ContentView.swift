@@ -9,21 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     @Binding  var roorscreen : RootView
+    @EnvironmentObject var fireAuthHelper : FireAuthHelper
+    @EnvironmentObject var fireDBHelper : FireDBHelper
+    @State private var selection = 1
+    
     var body: some View {
         VStack{
-            TabView{
+            TabView(selection: self.$selection){
                 CreateTripView()
                     .tabItem{
                         Label("Create",systemImage: "plus.circle")
-                    }
+                    }.environmentObject(fireDBHelper)
+                    .tag(0)
                 FindRidesView()
                     .tabItem{
                         Label("Find",systemImage: "magnifyingglass")
                     }
+                    .tag(1)
                 AccountView()
                     .tabItem{
-                        Label("Account",systemImage: "person.crop.circle")
+                        Label("Account",systemImage: "person.crop.circle").environmentObject(fireAuthHelper)
                     }
+                    .tag(2)
             }
         }
     }

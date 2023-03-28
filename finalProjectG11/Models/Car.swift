@@ -10,37 +10,31 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct Car : Codable, Hashable, Identifiable {
-    var id : String? = UUID().uuidString
+    @DocumentID var id : String? = UUID().uuidString
     var modelName:String = ""
     var companyName:String = ""
     var yearOfManufacture: Int = 0
-    var availableSeats: Int = 0
     var totalSeats: Int = 0
     var maxLuggage: Int = 0
-    var availableLuggage: Int = 0
     
     //pre-defined members
     private static let fModelName:String = "cModelName"
     private static let fCompanyName:String = "cCompanyName"
     private static let fYearOfManufacture:String = "cYearOfManufacture"
-    private static let fAvailableSeats:String = "cAvailableSeats"
     private static let fTotalSeats:String = "cTotalSeats"
     private static let fMaxLuggage:String = "cMaxLuggage"
-    private static let fAvailableLuggage:String = "fAvailableLuggage"
     
     init(){
         
     }
     
-    init(id: String? = nil, modelName: String, companyName: String, yearOfManufacture: Int, availableSeats: Int, totalSeats: Int, maxLuggage: Int, availableLuggae: Int) {
+    init(id: String? = nil, modelName: String, companyName: String, yearOfManufacture: Int,  totalSeats: Int, maxLuggage: Int) {
         self.id = id
         self.modelName = modelName
         self.companyName = companyName
         self.yearOfManufacture = yearOfManufacture
-        self.availableSeats = availableSeats
         self.totalSeats = totalSeats
         self.maxLuggage = maxLuggage
-        self.availableLuggage = availableLuggae
     }
     
     
@@ -62,10 +56,7 @@ struct Car : Codable, Hashable, Identifiable {
             return nil
         }
         
-        guard let cASeats = dictionary[Car.fAvailableSeats] as? Int else{
-            print(#function, "Unable to Available Seats from the object")
-            return nil
-        }
+        
         
         guard let cTSeats = dictionary[Car.fTotalSeats] as? Int else{
             print(#function, "Unable to Total seats from the object")
@@ -77,12 +68,9 @@ struct Car : Codable, Hashable, Identifiable {
             return nil
         }
         
-        guard let cALuggage = dictionary[Car.fAvailableLuggage] as? Int else{
-            print(#function, "Unable to available luggage from the object")
-            return nil
-        }
         
-        self.init(modelName: mName, companyName: cName, yearOfManufacture: cyear, availableSeats: cASeats, totalSeats: cTSeats, maxLuggage: cLuggage, availableLuggae: cALuggage)
+        
+        self.init(modelName: mName, companyName: cName, yearOfManufacture: cyear,totalSeats: cTSeats, maxLuggage: cLuggage)
     }
     
     func toDict() -> [String : Any] {
@@ -90,8 +78,6 @@ struct Car : Codable, Hashable, Identifiable {
                 Car.fCompanyName : self.companyName,
                 Car.fYearOfManufacture : self.yearOfManufacture,
                 Car.fTotalSeats : self.totalSeats,
-                Car.fAvailableSeats : self.availableSeats,
-                Car.fMaxLuggage : self.maxLuggage,
-                Car.fAvailableLuggage : self.availableLuggage]
+                Car.fMaxLuggage : self.maxLuggage,]
     }
 }

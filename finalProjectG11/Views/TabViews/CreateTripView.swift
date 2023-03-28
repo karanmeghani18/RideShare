@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct CreateTripView: View {
+    @EnvironmentObject private var fireDbHelper: FireDBHelper
+    
     @State private var originText:String = ""
     @State private var destinationText:String = ""
     @State private var fareText:String = ""
-    @State private var carSelection:Int = 1
-    @State private var carsList:[Car] = [Car(id: UUID().uuidString, modelName: "Model X", companyName: "Tesla", yearOfManufacture: 2019, availableSeats: 5, totalSeats: 6, maxLuggage: 3, availableLuggae: 2)]
+    @State private var carSelection:Int = 0
+    @State private var carsList:[Car] = []
     @State private var selectedCar:Car = Car()
     
     var body: some View {
@@ -46,6 +48,7 @@ struct CreateTripView: View {
                 TextField("Expected Fare", text: self.$fareText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .disableAutocorrection(true)
+                    .keyboardType(.numberPad)
                     .padding(.bottom, 10)
                 Form{
                     Section(header: Text("Fare Details")){
@@ -69,7 +72,7 @@ struct CreateTripView: View {
             }.padding()
             .navigationTitle("Create A Trip!")
             .onAppear(perform: {
-                
+                self.carsList = self.fireDbHelper.currentUser.car
             })
         }
     }

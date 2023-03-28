@@ -31,15 +31,18 @@
 		800E7FF829CE87B7008E3790 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FF729CE87B7008E3790 /* RootView.swift */; };
 		800E7FFA29CE894A008E3790 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FF929CE894A008E3790 /* SignInView.swift */; };
 		800E7FFC29CE89DF008E3790 /* FindRidesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FFB29CE89DF008E3790 /* FindRidesView.swift */; };
-		800E7FFE29CE9103008E3790 /* FIreAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FFD29CE9103008E3790 /* FIreAuthHelper.swift */; };
+		800E7FFE29CE9103008E3790 /* FireAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FFD29CE9103008E3790 /* FireAuthHelper.swift */; };
+		8F8648E429D27DEF00480C5A /* AddCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8648E329D27DEF00480C5A /* AddCarView.swift */; };
 		8FC6D76B29D2349E00E5D6C6 /* CreateTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC6D76A29D2349E00E5D6C6 /* CreateTripView.swift */; };
+		8FC6D76E29D241CB00E5D6C6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC6D76D29D241CB00E5D6C6 /* ProfileView.swift */; };
+		8FC6D77029D2528900E5D6C6 /* FireDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC6D76F29D2528900E5D6C6 /* FireDBHelper.swift */; };
 		8FE28C5329D127DF00A3FDEC /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5229D127DF00A3FDEC /* AccountView.swift */; };
-		8FE28C5629D1478100A3FDEC /* CustomAccountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5529D1478100A3FDEC /* CustomAccountButton.swift */; };
+		8FE28C5629D1478100A3FDEC /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5529D1478100A3FDEC /* CustomButton.swift */; };
 		8FE28C5829D1493B00A3FDEC /* TripsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5729D1493B00A3FDEC /* TripsListView.swift */; };
 		8FE28C5A29D1574B00A3FDEC /* TripItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5929D1574B00A3FDEC /* TripItemView.swift */; };
 		8FE28C5C29D15B4700A3FDEC /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5B29D15B4700A3FDEC /* TripDetailView.swift */; };
 		8FE28C5E29D15F9700A3FDEC /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5D29D15F9700A3FDEC /* Trip.swift */; };
-		8FE28C6029D15FC800A3FDEC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5F29D15FC800A3FDEC /* User.swift */; };
+		8FE28C6029D15FC800A3FDEC /* RideShareUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C5F29D15FC800A3FDEC /* RideShareUser.swift */; };
 		8FE28C6229D162CB00A3FDEC /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE28C6129D162CB00A3FDEC /* Car.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,15 +58,18 @@
 		800E7FF729CE87B7008E3790 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		800E7FF929CE894A008E3790 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		800E7FFB29CE89DF008E3790 /* FindRidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindRidesView.swift; sourceTree = "<group>"; };
-		800E7FFD29CE9103008E3790 /* FIreAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIreAuthHelper.swift; sourceTree = "<group>"; };
+		800E7FFD29CE9103008E3790 /* FireAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAuthHelper.swift; sourceTree = "<group>"; };
+		8F8648E329D27DEF00480C5A /* AddCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarView.swift; sourceTree = "<group>"; };
 		8FC6D76A29D2349E00E5D6C6 /* CreateTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripView.swift; sourceTree = "<group>"; };
+		8FC6D76D29D241CB00E5D6C6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		8FC6D76F29D2528900E5D6C6 /* FireDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireDBHelper.swift; sourceTree = "<group>"; };
 		8FE28C5229D127DF00A3FDEC /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
-		8FE28C5529D1478100A3FDEC /* CustomAccountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAccountButton.swift; sourceTree = "<group>"; };
+		8FE28C5529D1478100A3FDEC /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		8FE28C5729D1493B00A3FDEC /* TripsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsListView.swift; sourceTree = "<group>"; };
 		8FE28C5929D1574B00A3FDEC /* TripItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripItemView.swift; sourceTree = "<group>"; };
 		8FE28C5B29D15B4700A3FDEC /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
 		8FE28C5D29D15F9700A3FDEC /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
-		8FE28C5F29D15FC800A3FDEC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8FE28C5F29D15FC800A3FDEC /* RideShareUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideShareUser.swift; sourceTree = "<group>"; };
 		8FE28C6129D162CB00A3FDEC /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,16 +140,12 @@
 		800E7FE829CE64FA008E3790 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8FE28C5429D1475000A3FDEC /* CustomViews */,
+				8FC6D77329D262F500E5D6C6 /* TripsViews */,
+				8FC6D77229D262A600E5D6C6 /* TabViews */,
+				8FC6D77129D2628500E5D6C6 /* AuthenticationViews */,
+				8FC6D76C29D241B400E5D6C6 /* AccountOptinsView */,
 				800E7FC329CE63D8008E3790 /* ContentView.swift */,
-				800E7FEB29CE6577008E3790 /* SignUpView.swift */,
 				800E7FF529CE878E008E3790 /* MainView.swift */,
-				800E7FF929CE894A008E3790 /* SignInView.swift */,
-				800E7FFB29CE89DF008E3790 /* FindRidesView.swift */,
-				8FE28C5229D127DF00A3FDEC /* AccountView.swift */,
-				8FE28C5729D1493B00A3FDEC /* TripsListView.swift */,
-				8FE28C5B29D15B4700A3FDEC /* TripDetailView.swift */,
-				8FC6D76A29D2349E00E5D6C6 /* CreateTripView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -153,7 +155,7 @@
 			children = (
 				800E7FF729CE87B7008E3790 /* RootView.swift */,
 				8FE28C5D29D15F9700A3FDEC /* Trip.swift */,
-				8FE28C5F29D15FC800A3FDEC /* User.swift */,
+				8FE28C5F29D15FC800A3FDEC /* RideShareUser.swift */,
 				8FE28C6129D162CB00A3FDEC /* Car.swift */,
 			);
 			path = Models;
@@ -162,7 +164,8 @@
 		800E7FEA29CE650D008E3790 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				800E7FFD29CE9103008E3790 /* FIreAuthHelper.swift */,
+				800E7FFD29CE9103008E3790 /* FireAuthHelper.swift */,
+				8FC6D76F29D2528900E5D6C6 /* FireDBHelper.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -174,13 +177,51 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8FE28C5429D1475000A3FDEC /* CustomViews */ = {
+		8F8648E229D27DD400480C5A /* ProfileViews */ = {
 			isa = PBXGroup;
 			children = (
-				8FE28C5529D1478100A3FDEC /* CustomAccountButton.swift */,
-				8FE28C5929D1574B00A3FDEC /* TripItemView.swift */,
+				8FC6D76D29D241CB00E5D6C6 /* ProfileView.swift */,
+				8F8648E329D27DEF00480C5A /* AddCarView.swift */,
 			);
-			path = CustomViews;
+			path = ProfileViews;
+			sourceTree = "<group>";
+		};
+		8FC6D76C29D241B400E5D6C6 /* AccountOptinsView */ = {
+			isa = PBXGroup;
+			children = (
+				8F8648E229D27DD400480C5A /* ProfileViews */,
+			);
+			path = AccountOptinsView;
+			sourceTree = "<group>";
+		};
+		8FC6D77129D2628500E5D6C6 /* AuthenticationViews */ = {
+			isa = PBXGroup;
+			children = (
+				8FE28C5529D1478100A3FDEC /* CustomButton.swift */,
+				800E7FF929CE894A008E3790 /* SignInView.swift */,
+				800E7FEB29CE6577008E3790 /* SignUpView.swift */,
+			);
+			path = AuthenticationViews;
+			sourceTree = "<group>";
+		};
+		8FC6D77229D262A600E5D6C6 /* TabViews */ = {
+			isa = PBXGroup;
+			children = (
+				8FC6D76A29D2349E00E5D6C6 /* CreateTripView.swift */,
+				800E7FFB29CE89DF008E3790 /* FindRidesView.swift */,
+				8FE28C5229D127DF00A3FDEC /* AccountView.swift */,
+			);
+			path = TabViews;
+			sourceTree = "<group>";
+		};
+		8FC6D77329D262F500E5D6C6 /* TripsViews */ = {
+			isa = PBXGroup;
+			children = (
+				8FE28C5929D1574B00A3FDEC /* TripItemView.swift */,
+				8FE28C5729D1493B00A3FDEC /* TripsListView.swift */,
+				8FE28C5B29D15B4700A3FDEC /* TripDetailView.swift */,
+			);
+			path = TripsViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,17 +321,20 @@
 				8FE28C5C29D15B4700A3FDEC /* TripDetailView.swift in Sources */,
 				8FE28C5829D1493B00A3FDEC /* TripsListView.swift in Sources */,
 				8FE28C6229D162CB00A3FDEC /* Car.swift in Sources */,
+				8FC6D77029D2528900E5D6C6 /* FireDBHelper.swift in Sources */,
 				800E7FF629CE878E008E3790 /* MainView.swift in Sources */,
-				8FE28C5629D1478100A3FDEC /* CustomAccountButton.swift in Sources */,
+				8FE28C5629D1478100A3FDEC /* CustomButton.swift in Sources */,
 				800E7FEC29CE6577008E3790 /* SignUpView.swift in Sources */,
-				8FE28C6029D15FC800A3FDEC /* User.swift in Sources */,
+				8FE28C6029D15FC800A3FDEC /* RideShareUser.swift in Sources */,
+				8FC6D76E29D241CB00E5D6C6 /* ProfileView.swift in Sources */,
 				800E7FC229CE63D8008E3790 /* finalProjectG11App.swift in Sources */,
 				8FE28C5329D127DF00A3FDEC /* AccountView.swift in Sources */,
 				8FC6D76B29D2349E00E5D6C6 /* CreateTripView.swift in Sources */,
 				800E7FF829CE87B7008E3790 /* RootView.swift in Sources */,
 				8FE28C5A29D1574B00A3FDEC /* TripItemView.swift in Sources */,
+				8F8648E429D27DEF00480C5A /* AddCarView.swift in Sources */,
 				8FE28C5E29D15F9700A3FDEC /* Trip.swift in Sources */,
-				800E7FFE29CE9103008E3790 /* FIreAuthHelper.swift in Sources */,
+				800E7FFE29CE9103008E3790 /* FireAuthHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,9 @@ import SwiftUI
 struct SignUpView: View {
     
     @EnvironmentObject var fireAuthHelper : FireAuthHelper
+    @EnvironmentObject var fireDBHelper : FireDBHelper
     
+    @State private var name : String = ""
     @State private var email : String = ""
     @State private var password : String = ""
     @State private var confirmPassword : String = ""
@@ -21,13 +23,16 @@ struct SignUpView: View {
     var body: some View {
             VStack{
                 Form{
-                    TextField("Enter Email", text: self.$email)
+                    TextField("Name", text: self.$name)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                    SecureField("Enter Password", text: self.$password)
+                    TextField("Email", text: self.$email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                    SecureField("Enter Password Again", text: self.$confirmPassword)
+                    SecureField("Create Password", text: self.$password)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                    SecureField("Confirm Password", text: self.$confirmPassword)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                 }//Form ends
@@ -46,10 +51,15 @@ struct SignUpView: View {
                         //and display alert accordingly
                         
                         //if all the data is validated
-                        self.fireAuthHelper.signUp(email: self.email, password: self.password)
-                        
-                        //move to home screen
-                        self.rootScreen = .Content
+                        self.fireAuthHelper.signUp(name: self.name, email: self.email, password: self.password){user in
+                            if(user != nil){
+                                self.fireDBHelper.addUser(user: user!)
+                                self.rootScreen = .Content
+                            }else{
+                                //show alet for error
+                            }
+                            
+                        }
                     }){
                         Text("Create Account")
                     }//Button ends

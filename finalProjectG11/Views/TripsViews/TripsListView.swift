@@ -32,16 +32,16 @@ struct TripsListView: View {
             }
             .onAppear(perform: {
                 
-                let carForTrip:Car = Car(id: UUID().uuidString, modelName: "Model X", companyName: "Tesla", yearOfManufacture: 2019, availableSeats: 5, totalSeats: 6, maxLuggage: 3, availableLuggae: 2)
+                let carForTrip:Car = Car(id: UUID().uuidString, modelName: "Model X", companyName: "Tesla", yearOfManufacture: 2019, totalSeats: 6, maxLuggage: 3)
                 
-                let user:User = User(userName: "Om C.", profilePhotoUrl: "ProfilePhoto", email: "omchevli@gmail.com", car: carForTrip)
+                let user:RideShareUser = RideShareUser(userName: "Om C.", profilePhotoUrl: "ProfilePhoto", email: "omchevli@gmail.com", car: [carForTrip])
                 
                 self.tripsList = [
-                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4),
-                    Trip(id: UUID().uuidString, user: user, origin: "", destination:"Brampton, ON", distance:0.0, fare: 19.92, travelTime: 2.4),
-                    Trip(id: UUID().uuidString, user: user, origin: "", destination:"", distance:0.0, fare: 40.7, travelTime: 2.4),
-                    Trip(id: UUID().uuidString, user: user, origin: "", destination:"", distance:0.0, fare: 29.2, travelTime: 2.4),
-                    Trip(id: UUID().uuidString,user: user, origin: "", destination:"", distance:0.0, fare: 29.2, travelTime: 2.4),
+                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
+                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
+                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
+                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
+
                     
                 ]
             })

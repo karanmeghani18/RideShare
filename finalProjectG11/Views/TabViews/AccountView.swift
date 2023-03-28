@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct AccountView: View {
+    @EnvironmentObject var fireAuthHelper : FireAuthHelper
+    @EnvironmentObject var fireDBHelper : FireDBHelper
+    @State private var profileSelection : Int? = nil
     var body: some View {
         VStack{
+            NavigationLink(destination: ProfileView()
+                .environmentObject(fireDBHelper)
+                .environmentObject(fireAuthHelper), tag: 3, selection: self.$profileSelection ){}.hidden()
             HStack{
                 Image("ProfilePhoto")
                     .resizable()
                     .clipShape(Circle())
                     .frame(width: 50, height: 50, alignment: .leading)
                     .padding(.trailing, 16)
-                Text("Om Chevli")
+                Text(fireDBHelper.currentUser.userName)
                     .font(.title3)
             }.frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -25,19 +31,19 @@ struct AccountView: View {
                 EmptyView()
             }
             
-            CustomAccountButton(title: "Trips History", action: {
+            CustomButton(title: "Trips History", action: {
                 
             })
             
-            CustomAccountButton(title: "Booking History", action: {
+            CustomButton(title: "Booking History", action: {
                 
             })
             
-            CustomAccountButton(title: "Profile", action: {
-                
+            CustomButton(title: "Profile", action: {
+                self.profileSelection = 3
             })
             
-            CustomAccountButton(title: "Trips Earnings", action: {
+            CustomButton(title: "Trips Earnings", action: {
                 
             })
             
