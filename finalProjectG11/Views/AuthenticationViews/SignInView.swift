@@ -59,11 +59,7 @@ struct SignInView: View {
                                     print("Sign in failed.")
                                     invalidUserCredAlert = true
                                 }
-                            }
-                            
-                            
-                            //navigate to home screen
-                            self.rootScreen = .Content
+                            } 
                         }else{
                             //trigger alert displaying errors
                             print(#function, "email and password cannot be empty")

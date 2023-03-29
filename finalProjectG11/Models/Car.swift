@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct Car : Codable, Hashable, Identifiable {
-    @DocumentID var id : String? = UUID().uuidString
+    var id : String? = UUID().uuidString
     var modelName:String = ""
     var companyName:String = ""
     var yearOfManufacture: Int = 0

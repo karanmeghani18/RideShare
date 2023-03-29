@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct Trip : Codable, Hashable, Equatable, Identifiable{
-    @DocumentID var id : String? = UUID().uuidString
+    var id : String? = UUID().uuidString
     var user : RideShareUser = RideShareUser()
     var selectedCarIndex: Int = 0
     var origin: String = ""

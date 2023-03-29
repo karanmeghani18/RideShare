@@ -11,6 +11,9 @@ struct FindRidesView: View {
     @State private var originText:String = ""
     @State private var destinationText:String = ""
     @State private var tripsListSelection : Int? = nil
+    @EnvironmentObject private var locationHelper:LocationHelper
+    
+    
     var body: some View {
         NavigationView{
             VStack{
@@ -18,6 +21,12 @@ struct FindRidesView: View {
                 TextField("Origin", text: self.$originText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .disableAutocorrection(true)
+                    .onSubmit {
+                        print("User hit return!")
+                        locationHelper.fetchLocation(locationName: self.originText){ foundLocation in
+                            print("Found Location: \(foundLocation?.first?.name)")
+                        }
+                    }
                 EmptyView()
                 TextField("Destination", text: self.$destinationText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())

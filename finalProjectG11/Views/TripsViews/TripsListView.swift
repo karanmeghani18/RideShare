@@ -15,7 +15,6 @@ struct TripsListView: View {
         NavigationLink(destination: TripDetailView(trip: selectedTrip), tag: 1, selection: self.$tripDetailSelection ){}.hidden()
         NavigationView{
             VStack{
-                
                 List{
                     ForEach(self.$tripsList) { trip in
                         TripItemView(trip: trip.wrappedValue,
@@ -28,7 +27,6 @@ struct TripsListView: View {
                 .padding(.vertical, -16)
                 .padding(.horizontal,-10)
                 Spacer()
-                    
             }
             .onAppear(perform: {
                 

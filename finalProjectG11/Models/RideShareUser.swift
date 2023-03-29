@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct RideShareUser : Codable, Hashable {
-    @DocumentID var id : String? = UUID().uuidString
+    var id : String? = UUID().uuidString
     var userName : String = ""
     var profilePhotoUrl : String = ""
     var email : String = ""

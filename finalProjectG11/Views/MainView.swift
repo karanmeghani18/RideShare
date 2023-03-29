@@ -13,6 +13,7 @@ import FirebaseAuth
 struct MainView: View {
     @State private var rootView : RootView
     private let fireAuthHelper = FireAuthHelper()
+    let locationHelper = LocationHelper()
     private let fireDBHelper = FireDBHelper.getInstance() ?? FireDBHelper(store: Firestore.firestore())
     
     init() {
@@ -41,6 +42,7 @@ struct MainView: View {
                 ContentView(roorscreen: $rootView)
                     .environmentObject(fireDBHelper)
                     .environmentObject(fireAuthHelper)
+                    .environmentObject(locationHelper)
             }
         }
     }
