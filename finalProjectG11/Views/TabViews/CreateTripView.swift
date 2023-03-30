@@ -122,7 +122,7 @@ struct CreateTripView: View {
 
                         fireDbHelper.addTrip(trip: newTrip)
                         self.alertTitle = "Trip Created"
-                        self.alertMessage = "Your trip has been successfully created."
+                        self.alertComment = "Your trip has been successfully created."
                         showAlert = true
                         self.originText = ""
                         self.destinationText = ""
@@ -151,19 +151,19 @@ struct CreateTripView: View {
     func validation() -> Bool{
         if self.originText.isEmpty{
             alertTitle = "Origin Location"
-            alertMessage = "Origin cannot be empty"
+            alertComment = "Origin cannot be empty"
             showAlert = true
             return false
 
         }else if destinationText.isEmpty{
             alertTitle = "Destination Location"
-            alertMessage = "Destination cannot be empty"
+            alertComment = "Destination cannot be empty"
             showAlert = true
             return false
 
         }else if fareText.isEmpty{
             alertTitle = "Expected Fare"
-            alertMessage = "Expected Fare cannot be empty"
+            alertComment = "Expected Fare cannot be empty"
             showAlert = true
             return false
 

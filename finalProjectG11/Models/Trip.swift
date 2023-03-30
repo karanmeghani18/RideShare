@@ -45,8 +45,8 @@ struct Trip : Codable, Hashable, Equatable, Identifiable{
     private static var fDriverName = "tDriverName"
     private static var fDriverPhoto = "tDriverPhoto"
     private static var fRiderIds = "tRiderIds"
-    private static var forigin:String = "tOriginName"
-    private static var fdestination:String = "tDestinationName"
+    static var forigin:String = "tOriginName"
+    static var fdestination:String = "tDestinationName"
     private static let foriginGeoCord:String = "tOriginGeoCord"
     private static let fdestinationGeoCord:String = "tDestGeoCord"
     private static let fCar:String = "fCar"
@@ -69,7 +69,7 @@ struct Trip : Codable, Hashable, Equatable, Identifiable{
     }
    
     
-    init?(dictionary : [String : Any]){
+    init?(dictionary : [String : Any], receivedId:String? = nil){
 
         guard let tDriverId = dictionary[Trip.fDriverUserId] as? String else {
             print(#function, "Unable to read driver user id from the object")
@@ -145,15 +145,10 @@ struct Trip : Codable, Hashable, Equatable, Identifiable{
             return nil
         }
         
-        guard let tId = dictionary["id"] as? String else{
-            print(#function, "Unable to retrive trip id from the object")
-            return nil
-        }
-        
         
         
 
-        self.init(id: tId, driver: tDriver, originLocation: tOriginLocationObj, destLocation: tDestLocationObj, car: tCar, fare: tFare, availableSeats: tASeats, availableLuggage: tALuggage, riderIds: tRiderIds)
+        self.init(id: receivedId, driver: tDriver, originLocation: tOriginLocationObj, destLocation: tDestLocationObj, car: tCar, fare: tFare, availableSeats: tASeats, availableLuggage: tALuggage, riderIds: tRiderIds)
     }
 
     func toDict() -> [String : Any] {

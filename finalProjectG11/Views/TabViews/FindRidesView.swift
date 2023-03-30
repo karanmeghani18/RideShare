@@ -15,15 +15,17 @@ struct FindRidesView: View {
     @State private var alertComment:String = ""
     @State private var originGeoCords:[Double] = []
     @State private var destinationGeoCords:[Double] = []
+    @State private var tripsResults:[Trip] = []
     @State private var showAlert:Bool = false
-
-    @EnvironmentObject private var locationHelper:LocationHelper
     
+    @EnvironmentObject private var locationHelper:LocationHelper
+    @EnvironmentObject private var fireDBHelper:FireDBHelper
+
     
     var body: some View {
         NavigationView{
             VStack{
-                NavigationLink(destination: TripsListView(), tag: 1, selection: self.$tripsListSelection){}.hidden()
+                NavigationLink(destination: TripsListView(tripsList : tripsResults), tag: 1, selection: self.$tripsListSelection){}.hidden()
                 HStack{
                     TextField("Origin", text: self.$originText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -63,9 +65,19 @@ struct FindRidesView: View {
                 }
                 Spacer()
                 Button(action:{
+
+
                     if validation(){
-                        //actions
-                        self.tripsListSelection = 1
+                        self.fireDBHelper.findTrips(origin: self.originText, destination: self.destinationText, completion: {
+                                                foundTripsList in
+                                                if(foundTripsList.isEmpty){
+                                                    //show alert, no trips found
+                                                }else{
+                                                    tripsResults = foundTripsList
+                                                    self.tripsListSelection = 1
+                                                }
+
+                                            })
                     }
 
                 }){
@@ -86,7 +98,7 @@ struct FindRidesView: View {
        
         
     }
-
+    
     func handleLocationAlert(location: LocationType) {
         locationHelper.fetchLocation(locationName: location == LocationType.Destination ? self.destinationText : self.originText){
             foundLocation in
@@ -105,27 +117,27 @@ struct FindRidesView: View {
                 alertTitle = "\(location) Location Not Found!"
                 alertComment = "Please enter proper \(location) location"
             }
-
+            
             showAlert = true
         }
     }
     func validation() -> Bool{
         if self.originText.isEmpty{
             alertTitle = "Origin Location"
-            alertMessage = "Origin cannot be empty"
+            alertComment = "Origin cannot be empty"
             showAlert = true
             return false
 
         }else if destinationText.isEmpty{
             alertTitle = "Destination Location"
-            alertMessage = "Destination cannot be empty"
+            alertComment = "Destination cannot be empty"
             showAlert = true
             return false
 
         }
             return true
     }
-    
+
 }
 
 struct HomeView_Previews: PreviewProvider {

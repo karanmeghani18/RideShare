@@ -49,9 +49,39 @@ class FireDBHelper : ObservableObject{
         
     }
     
+    func findTrips(origin: String, destination:String, completion: @escaping ([Trip]) -> Void) {
+        var results:[Trip] = []
+        self.store
+            .collection(COLLECTION_TRIPS)
+            .whereField(Trip.forigin, isEqualTo: origin)
+            .whereField(Trip.fdestination, isEqualTo: destination)
+            .addSnapshotListener({ (querySnapshot, error) in
+                guard let snapshot = querySnapshot else{
+                    print(#function, "Unable to retrieve data from Firestore : \(error.debugDescription)")
+                    return
+                }
+                if(snapshot.documentChanges.isEmpty){
+                    completion(results)
+                    return
+                }
+                
+                snapshot.documentChanges.forEach{ (docChange) in
+                    
+                    let receivedTrip : Trip = Trip(dictionary: docChange.document.data(), receivedId: docChange.document.documentID) ?? Trip()
+                    print(#function, docChange.document.data())
+                    results.append(receivedTrip)
+                    
+                    if(snapshot.documentChanges.last == docChange){
+                        completion(results)
+                    }
+                }
+                
+            })
+    }
+    
     func getUserProfile(completion: @escaping (Bool) -> Void) {
         self.loggedInUserEmail = UserDefaults.standard.string(forKey: "KEY_EMAIL") ?? ""
-
+        
         if (loggedInUserEmail.isEmpty){
             print(#function, "Logged in user not identified")
         }else{
@@ -97,11 +127,11 @@ class FireDBHelper : ObservableObject{
         if (loggedInUserEmail.isEmpty){
             print(#function, "Logged in user not identified")
         }else{
-            var updatedTrip = Trip.copyWith(driver: currentUser, originLocation: trip.originLocation, destLocation: trip.destLocation, car: trip.car, fare: trip.fare, availableSeats: trip.availableSeats, availableLuggage: trip.availableLuggage, riderIds: trip.riderIds)
+            let updatedTrip = Trip.copyWith(driver: currentUser, originLocation: trip.originLocation, destLocation: trip.destLocation, car: trip.car, fare: trip.fare, availableSeats: trip.availableSeats, availableLuggage: trip.availableLuggage, riderIds: trip.riderIds)
             self.store
                 .collection(COLLECTION_TRIPS)
                 .addDocument(data: updatedTrip.toDict())
-           
+            
         }
     }
     
