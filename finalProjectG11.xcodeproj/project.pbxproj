@@ -33,6 +33,8 @@
 		800E7FFC29CE89DF008E3790 /* FindRidesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FFB29CE89DF008E3790 /* FindRidesView.swift */; };
 		800E7FFE29CE9103008E3790 /* FireAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E7FFD29CE9103008E3790 /* FireAuthHelper.swift */; };
 		8F3BFEAA29D520AC00B3F210 /* LocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3BFEA929D520AC00B3F210 /* LocationType.swift */; };
+		8081B5A129D56DA9001DD1FE /* TripsHistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8081B5A029D56DA9001DD1FE /* TripsHistoryListView.swift */; };
+		8081B5A329D56E72001DD1FE /* BookingHistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8081B5A229D56E72001DD1FE /* BookingHistoryListView.swift */; };
 		8F8648E429D27DEF00480C5A /* AddCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8648E329D27DEF00480C5A /* AddCarView.swift */; };
 		8F8648E629D28E7000480C5A /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8648E529D28E7000480C5A /* LocationHelper.swift */; };
 		8F8648E829D28EC200480C5A /* RideLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8648E729D28EC200480C5A /* RideLocation.swift */; };
@@ -63,6 +65,8 @@
 		800E7FFB29CE89DF008E3790 /* FindRidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindRidesView.swift; sourceTree = "<group>"; };
 		800E7FFD29CE9103008E3790 /* FireAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAuthHelper.swift; sourceTree = "<group>"; };
 		8F3BFEA929D520AC00B3F210 /* LocationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationType.swift; sourceTree = "<group>"; };
+		8081B5A029D56DA9001DD1FE /* TripsHistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsHistoryListView.swift; sourceTree = "<group>"; };
+		8081B5A229D56E72001DD1FE /* BookingHistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHistoryListView.swift; sourceTree = "<group>"; };
 		8F8648E329D27DEF00480C5A /* AddCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarView.swift; sourceTree = "<group>"; };
 		8F8648E529D28E7000480C5A /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		8F8648E729D28EC200480C5A /* RideLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideLocation.swift; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 				8FE28C5929D1574B00A3FDEC /* TripItemView.swift */,
 				8FE28C5729D1493B00A3FDEC /* TripsListView.swift */,
 				8FE28C5B29D15B4700A3FDEC /* TripDetailView.swift */,
+				8081B5A029D56DA9001DD1FE /* TripsHistoryListView.swift */,
+				8081B5A229D56E72001DD1FE /* BookingHistoryListView.swift */,
 			);
 			path = TripsViews;
 			sourceTree = "<group>";
@@ -325,12 +331,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				800E7FFA29CE894A008E3790 /* SignInView.swift in Sources */,
+				8081B5A329D56E72001DD1FE /* BookingHistoryListView.swift in Sources */,
 				800E7FFC29CE89DF008E3790 /* FindRidesView.swift in Sources */,
 				800E7FC429CE63D8008E3790 /* ContentView.swift in Sources */,
 				8FE28C5C29D15B4700A3FDEC /* TripDetailView.swift in Sources */,
 				8F3BFEAA29D520AC00B3F210 /* LocationType.swift in Sources */,
 				8FE28C5829D1493B00A3FDEC /* TripsListView.swift in Sources */,
 				8FE28C6229D162CB00A3FDEC /* Car.swift in Sources */,
+				8081B5A129D56DA9001DD1FE /* TripsHistoryListView.swift in Sources */,
 				8F8648E829D28EC200480C5A /* RideLocation.swift in Sources */,
 				8FC6D77029D2528900E5D6C6 /* FireDBHelper.swift in Sources */,
 				800E7FF629CE878E008E3790 /* MainView.swift in Sources */,
