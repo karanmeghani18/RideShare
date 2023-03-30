@@ -25,9 +25,15 @@ struct SignUpView: View {
                 Form{
                     TextField("Name", text: self.$name)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .autocorrectionDisabled(true)
+                        .keyboardType(.namePhonePad)
+                    
                     
                     TextField("Email", text: self.$email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .autocorrectionDisabled(true)
+                        .autocapitalization(.none)
+                        .keyboardType(.emailAddress)
                     
                     SecureField("Create Password", text: self.$password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -38,19 +44,12 @@ struct SignUpView: View {
                 }//Form ends
                 .disableAutocorrection(true)
                 Button(action:{
-    //                self.signInSelection = 1
                     self.rootScreen = .SignIn
                 }){
                     Text("Already have a account?")
                 }
                 Section{
                     Button(action: {
-                        //Task : validate the data
-                        //such as all the inputs are not empty
-                        //and check for password rule
-                        //and display alert accordingly
-                        
-                        //if all the data is validated
                         self.fireAuthHelper.signUp(name: self.name, email: self.email, password: self.password){user in
                             if(user != nil){
                                 self.fireDBHelper.addUser(user: user!)

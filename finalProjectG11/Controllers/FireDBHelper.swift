@@ -15,6 +15,7 @@ class FireDBHelper : ObservableObject{
     private static var shared : FireDBHelper?
     private let COLLECTION_USERS : String = "Users"
     private let COLLECTION_CARS : String = "Cars"
+    private let COLLECTION_TRIPS : String = "Trips"
     @Published var currentUser:RideShareUser = RideShareUser()
     
     var loggedInUserEmail:String = ""
@@ -90,9 +91,23 @@ class FireDBHelper : ObservableObject{
         }
     }
     
-    func getUserCars(completion: @escaping (Bool) -> Void){
-        self.loggedInUserEmail = UserDefaults.standard.string(forKey: "KEY_EMAIL") ?? ""
+    func addTrip(trip:Trip) {
+        print(#function, "Trying to insert trip \(trip.driverUserId) to firestore")
         
+        if (loggedInUserEmail.isEmpty){
+            print(#function, "Logged in user not identified")
+        }else{
+            var updatedTrip = Trip.copyWith(driver: currentUser, originLocation: trip.originLocation, destLocation: trip.destLocation, car: trip.car, fare: trip.fare, availableSeats: trip.availableSeats, availableLuggage: trip.availableLuggage, riderIds: trip.riderIds)
+            self.store
+                .collection(COLLECTION_TRIPS)
+                .addDocument(data: updatedTrip.toDict())
+           
+        }
+    }
+    
+    func getUserCars(completion: @escaping ([Car]) -> Void){
+        self.loggedInUserEmail = UserDefaults.standard.string(forKey: "KEY_EMAIL") ?? ""
+        print(#function, loggedInUserEmail)
         if (loggedInUserEmail.isEmpty){
             print(#function, "Logged in user not identified")
         }else{
@@ -137,6 +152,10 @@ class FireDBHelper : ObservableObject{
                                 if (matchedIndex != nil){
                                     self.currentUser.car[matchedIndex!] = receivedCar
                                 }
+                            }
+                            
+                            if(snapshot.documentChanges.last == docChange){
+                                completion(self.currentUser.car)
                             }
                             
                         }catch let err{

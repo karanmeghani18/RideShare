@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Binding  var roorscreen : RootView
+    @Binding  var rootScreen : RootView
     @EnvironmentObject var fireAuthHelper : FireAuthHelper
     @EnvironmentObject var fireDBHelper : FireDBHelper
     @State private var selection = 1
@@ -19,14 +19,15 @@ struct ContentView: View {
                 CreateTripView()
                     .tabItem{
                         Label("Create",systemImage: "plus.circle")
-                    }.environmentObject(fireDBHelper)
+                    }
+                    .environmentObject(fireDBHelper)
                     .tag(0)
                 FindRidesView()
                     .tabItem{
                         Label("Find",systemImage: "magnifyingglass")
                     }
                     .tag(1)
-                AccountView()
+                AccountView(rootScreen: $rootScreen)
                     .tabItem{
                         Label("Account",systemImage: "person.crop.circle").environmentObject(fireAuthHelper)
                     }

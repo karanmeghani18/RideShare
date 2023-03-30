@@ -16,6 +16,7 @@ struct RideShareUser : Codable, Hashable {
     var car: [Car] = []
     
     //pre-defined members
+    private static let fUserId:String = "uId"
     private static let fUserName:String = "uUserName"
     private static let fProfilePhotoUrl:String = "uProfilePhotoUrl"
     private static let fEmail:String = "uEmail"
@@ -25,7 +26,7 @@ struct RideShareUser : Codable, Hashable {
 
     }
     
-    init(id: String? = nil, userName: String, profilePhotoUrl: String, email: String, car: [Car] = []) {
+    init(id: String? = nil, userName: String, profilePhotoUrl: String, email: String = "", car: [Car] = []) {
         self.id = id
         self.userName = userName
         self.profilePhotoUrl = profilePhotoUrl
@@ -34,6 +35,11 @@ struct RideShareUser : Codable, Hashable {
     }
     
     init?(dictionary : [AnyHashable : Any]){
+        
+        guard let tid = dictionary[RideShareUser.fUserId] as? String else{
+            print(#function, "Unable to get id from the object Rideshare")
+            return nil
+        }
 
         guard let name = dictionary[RideShareUser.fUserName] as? String else{
             print(#function, "Unable to read Name from the object")
@@ -51,13 +57,16 @@ struct RideShareUser : Codable, Hashable {
             return nil
         }
 
-        self.init(userName: name, profilePhotoUrl: photoUrl, email: uemail)
+        self.init(id: tid, userName: name, profilePhotoUrl: photoUrl, email: uemail)
     }
     
     func toDict() -> [String : Any] {
-        return [RideShareUser.fUserName : self.userName,
-                RideShareUser.fProfilePhotoUrl: self.profilePhotoUrl,
-                RideShareUser.fEmail : self.email
+        return [
+            RideShareUser.fUserId : self.id ?? "",
+            RideShareUser.fUserName : self.userName,
+            RideShareUser.fProfilePhotoUrl: self.profilePhotoUrl,
+            RideShareUser.fEmail : self.email
         ]
     }
+    
 }

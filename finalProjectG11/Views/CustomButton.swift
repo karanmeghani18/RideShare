@@ -10,11 +10,13 @@ import SwiftUI
 struct CustomButton: View{
     var title: String
     var action: () -> Void
+    var color: Color = Color.black
+    
     var body: some View{
         Button(action: self.action) {
             Text(self.title)
                 .font(.title3)
-                .foregroundColor(.black)
+                .foregroundColor(color)
                 .bold()
                 .padding(.vertical, 15)
                 .padding(.horizontal, 10)

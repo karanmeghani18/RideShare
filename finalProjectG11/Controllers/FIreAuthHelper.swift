@@ -99,9 +99,9 @@ class FireAuthHelper: ObservableObject{
     
     func signOut(){
         do{
-            
             try Auth.auth().signOut()
-            
+            UserDefaults.standard.set("", forKey: "KEY_EMAIL")
+            UserDefaults.standard.set("", forKey: "KEY_PASSWORD")
         }catch let signOutError as NSError{
             print(#function, "unable to sign out user : \(signOutError)")
         }

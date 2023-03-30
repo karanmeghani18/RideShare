@@ -39,7 +39,7 @@ struct MainView: View {
                     .environmentObject(fireDBHelper)
                     .environmentObject(fireAuthHelper)
             case .Content:
-                ContentView(roorscreen: $rootView)
+                ContentView(rootScreen: $rootView)
                     .environmentObject(fireDBHelper)
                     .environmentObject(fireAuthHelper)
                     .environmentObject(locationHelper)

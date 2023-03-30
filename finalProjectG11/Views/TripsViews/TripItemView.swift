@@ -18,13 +18,13 @@ struct TripItemView:View {
         Button(action: onTap) {
             HStack{
                 
-                Image(self.trip.user.profilePhotoUrl)
+                Image(self.trip.driverPhoto)
                     .resizable()
                     .clipShape(Circle())
                     .frame(width: 50, height: 50, alignment: .leading)
                     .padding(.trailing, 8)
                 VStack(alignment: .leading){
-                    Text(self.trip.user.userName)
+                    Text(self.trip.driverName)
                         .font(.title3)
                         .foregroundColor(Color.black)
                         .frame(alignment: .leading)
@@ -34,7 +34,7 @@ struct TripItemView:View {
                 }
                 Spacer()
                 VStack(alignment: .trailing){
-                    Text("\(self.trip.user.car[self.trip.selectedCarIndex].totalSeats) Seats")
+                    Text("\(self.trip.car.totalSeats) Seats")
                         .foregroundColor(Color.black)
                         .frame(alignment: .leading)
                         .padding(.bottom, 2)

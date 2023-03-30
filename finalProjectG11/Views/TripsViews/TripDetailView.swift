@@ -9,9 +9,10 @@ import SwiftUI
 
 struct TripDetailView: View {
     var trip: Trip
+    @EnvironmentObject private var fireDBHelper:FireDBHelper
     
     var body: some View {
-        let carForTrip = trip.user.car[trip.selectedCarIndex]
+        let carForTrip = trip.car
         NavigationView{
             VStack(alignment: .leading){
                 Text("From")
@@ -27,10 +28,9 @@ struct TripDetailView: View {
                
                 Form{
                     Section(header: Text("Driver Profile")){
-                        LabeledContent("Name", value: trip.user.userName)
-                        LabeledContent("Email", value: trip.user.email)
+                        LabeledContent("Name", value: trip.driverName)
                     }.padding(.horizontal,-10)
-                    
+
                     Section(header: Text("Car")){
                         LabeledContent("Model", value: carForTrip.modelName)
                         LabeledContent("Company", value: carForTrip.companyName)
@@ -41,10 +41,13 @@ struct TripDetailView: View {
                         LabeledContent("Total Luggage Space", value: String(carForTrip.maxLuggage))
                     }.padding(.horizontal,-10)
                     
+
                     Section(header: Text("Trip")){
-                        LabeledContent("Distance", value: String(trip.distance))
                         LabeledContent("Fare", value: "$\(trip.fare)")
-                        LabeledContent("Travel Time", value: "\(String(trip.travelTime)) hrs").padding(.bottom, 28)
+                        if(trip.driverUserId == fireDBHelper.currentUser.id){
+                            LabeledContent("RideShare Commission", value: "$\(trip.fare * 0.2)")
+                            LabeledContent("You Receive", value: "$\(trip.fare * 0.8)")
+                        }
                     }.padding(.horizontal,-10)
                         
                 }
@@ -62,27 +65,6 @@ struct TripDetailView: View {
 struct TripDetailView_Previews: PreviewProvider {
     
     static var previews: some View {
-        TripDetailView(
-            trip: Trip(id: UUID().uuidString,
-            user: RideShareUser(
-                userName: "Om C.",
-                profilePhotoUrl: "ProfilePhoto",
-                email: "omchevli@gmail.com",
-                car: [Car(id: UUID().uuidString,
-                          modelName: "Model X",
-                          companyName: "Tesla",
-                          yearOfManufacture: 2019,
-                          totalSeats: 6,
-                          maxLuggage: 3)
-            ]),
-            origin: "Toronto, ON",
-            availableSeats: 5,
-            destination:"Brampton, ON",
-            distance:0.0,
-            fare: 29.2,
-            travelTime: 2.4,
-            availableLuggae: 2,
-            selectedCarIndex: 0)
-        )
+        TripDetailView(trip: Trip())
     }
 }

@@ -79,7 +79,9 @@ struct ProfileView: View {
             }.onAppear(perform:{
                 self.user = fireDBHelper.currentUser
                 self.userName = user?.userName ?? ""
-                carsList = user?.car ?? []
+                self.fireDBHelper.getUserCars(){ cars in
+                    self.carsList = cars
+                }
             })
             .padding()
             

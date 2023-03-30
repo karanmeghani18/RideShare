@@ -35,10 +35,10 @@ struct TripsListView: View {
                 let user:RideShareUser = RideShareUser(userName: "Om C.", profilePhotoUrl: "ProfilePhoto", email: "omchevli@gmail.com", car: [carForTrip])
                 
                 self.tripsList = [
-                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
-                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
-                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
-                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
+//                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
+//                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
+//                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
+//                    Trip(id: UUID().uuidString, user: user, origin: "Toronto, ON", availableSeats: 3, destination:"Drampton", distance:4.3, fare: 29.2, travelTime: 2.4, availableLuggae: 2, selectedCarIndex: 0),
 
                     
                 ]

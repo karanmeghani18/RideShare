@@ -10,102 +10,170 @@ import FirebaseFirestoreSwift
 
 struct Trip : Codable, Hashable, Equatable, Identifiable{
     var id : String? = UUID().uuidString
-    var user : RideShareUser = RideShareUser()
-    var selectedCarIndex: Int = 0
-    var origin: String = ""
-    var destination: String = ""
-    var distance: Double = 0.0
+    var driver = RideShareUser()
+    var car : Car = Car()
+    var driverUserId: String{
+        return driver.id ?? ""
+    }
+    var driverName: String{
+        return driver.userName
+    }
+    var driverPhoto: String{
+        return driver.profilePhotoUrl
+    }
+    var originLocation: RideLocation = RideLocation()
+    var destLocation: RideLocation = RideLocation()
+    var riderIds: [String] = []
+    var origin: String{
+        return originLocation.name
+    }
+    var destination: String{
+        return destLocation.name
+    }
     var fare: Double = 0.0
-    var travelTime:Double = 0.0
     var availableSeats: Int = 0
     var availableLuggage: Int = 0
-    
-    //pre-defined members
-    private static var fUser:String = "tUser"
-    private static var forigin:String = "torigin"
-    private static var fdestination:String = "tdestinatiom"
-    private static var fdistance:String = "tdistance"
-    private static let fAvailableSeats:String = "cAvailableSeats"
-    private static var ffare:String = "tfare"
-    private static var ftravelTime:String = "ttravelTime"
-    private static let fAvailableLuggage:String = "fAvailableLuggage"
-    private static let fselectedCarIndex:String = "fselectedCarIndex"
-    
-    init(){
-
+    var originGeoCord: [Double]{
+        return [originLocation.latitude, originLocation.longitude]
+    }
+    var destinationGeoCord: [Double]{
+        return [destLocation.latitude, destLocation.longitude]
     }
     
-    init(id: String? = nil, user: RideShareUser, origin: String, availableSeats: Int, destination: String, distance: Double, fare: Double, travelTime: Double, availableLuggae: Int, selectedCarIndex:Int) {
+    //pre-defined members
+    private static var fDriverUserId = "tDriverUserId"
+    private static var fDriverName = "tDriverName"
+    private static var fDriverPhoto = "tDriverPhoto"
+    private static var fRiderIds = "tRiderIds"
+    private static var forigin:String = "tOriginName"
+    private static var fdestination:String = "tDestinationName"
+    private static let foriginGeoCord:String = "tOriginGeoCord"
+    private static let fdestinationGeoCord:String = "tDestGeoCord"
+    private static let fCar:String = "fCar"
+    private static let fAvailableLuggage:String = "fAvailableLuggage"
+    private static let fAvailableSeats:String = "cAvailableSeats"
+    private static var ffare:String = "tfare"
+    
+    init(){}
+    
+    init(id: String? = nil, driver: RideShareUser, originLocation: RideLocation, destLocation: RideLocation, car:Car, fare: Double, availableSeats: Int, availableLuggage: Int, riderIds: [String]) {
         self.id = id
-        self.user = user
-        self.origin = origin
-        self.destination = destination
-        self.distance = distance
+        self.driver = driver
+        self.originLocation = originLocation
+        self.destLocation = destLocation
+        self.car = car
         self.fare = fare
         self.availableSeats = availableSeats
-        self.travelTime = travelTime
-        self.availableLuggage = availableLuggae
-        self.selectedCarIndex = selectedCarIndex
+        self.availableLuggage = availableLuggage
+        self.riderIds = riderIds
     }
    
     
     init?(dictionary : [String : Any]){
 
-        guard let tUser = dictionary[Trip.fUser] as? RideShareUser else {
-            print(#function, "Unable to read user from the object")
-            return nil
-        }
-
-        guard let tOrigin = dictionary[Trip.forigin] as? String else {
-            print(#function, "Unable to read origin from the object")
-            return nil
-        }
-
-        guard let tDestination = dictionary[Trip.fdestination] as? String else {
-            print(#function, "Unable to read destination from the object")
+        guard let tDriverId = dictionary[Trip.fDriverUserId] as? String else {
+            print(#function, "Unable to read driver user id from the object")
             return nil
         }
         
-        guard let tDistance = dictionary[Trip.fdistance] as? Double else {
-            print(#function, "Unable to read destination from the object")
+        guard let tDriverPhoto = dictionary[Trip.fDriverPhoto] as? String else{
+            print(#function, "Unable to driver photo from the object")
+            return nil
+        }
+        
+        guard let tDriverName = dictionary[Trip.fDriverName] as? String else{
+            print(#function, "Unable to driver name from the object")
+            return nil
+        }
+        
+        let tDriver:RideShareUser = RideShareUser(id: tDriverId, userName: tDriverName, profilePhotoUrl: tDriverPhoto)
+        
+        guard let tRiderIds = dictionary[Trip.fRiderIds] as? [String] else {
+            print(#function, "Unable to read rider ids from the object")
             return nil
         }
 
+        guard let tOriginName = dictionary[Trip.forigin] as? String else {
+            print(#function, "Unable to read origin name from the object")
+            return nil
+        }
+        
+        guard let tDestName = dictionary[Trip.fdestination] as? String else {
+            print(#function, "Unable to read destination name from the object")
+            return nil
+        }
+        
+        guard let tOriginCords = dictionary[Trip.foriginGeoCord] as? [Double] else{
+            print(#function, "Unable to origin geocords from the object")
+            return nil
+        }
+        
+        guard let tDestCords = dictionary[Trip.fdestinationGeoCord] as? [Double] else{
+            print(#function, "Unable to desti geocords from the object")
+            return nil
+        }
+        
+//        guard let tCar = dictionary[Trip.fdestinationGeoCord] as? [Double] else{
+//            print(#function, "Unable to desti geocords from the object")
+//            return nil
+//        }
+        
+        guard let tCar:Car = Car(dictionary: dictionary[Trip.fCar] as! [AnyHashable : Any]) else{
+            print(#function, "Problem in car retrive")
+            return nil
+        }
+        
+        let tOriginLocationObj = RideLocation(cityName: tOriginName, latitude: tOriginCords[0], longitude: tOriginCords[1])
+        
+        let tDestLocationObj = RideLocation(cityName: tDestName, latitude: tDestCords[0], longitude: tDestCords[1])
+        
+        
+        
+        guard let tASeats = dictionary[Trip.fAvailableSeats] as? Int else{
+            print(#function, "Unable to Available Seats from the object")
+            return nil
+        }
+        
         guard let tFare = dictionary[Trip.ffare] as? Double else {
             print(#function, "Unable to read fare from the object")
             return nil
         }
 
-        guard let tTravelTime = dictionary[Trip.ftravelTime] as? Double else {
-            print(#function, "Unable to read travel time from the object")
-            return nil
-        }
-        
-        guard let cASeats = dictionary[Trip.fAvailableSeats] as? Int else{
-            print(#function, "Unable to Available Seats from the object")
-            return nil
-        }
-        guard let cALuggage = dictionary[Trip.fAvailableLuggage] as? Int else{
+       
+        guard let tALuggage = dictionary[Trip.fAvailableLuggage] as? Int else{
             print(#function, "Unable to available luggage from the object")
             return nil
         }
-        guard let cselectedCarIndex = dictionary[Trip.fselectedCarIndex] as? Int else{
-            print(#function, "Unable to selected car index from the object")
+        
+        guard let tId = dictionary["id"] as? String else{
+            print(#function, "Unable to retrive trip id from the object")
             return nil
         }
+        
+        
+        
 
-        self.init(user: tUser, origin: tOrigin, availableSeats: cASeats, destination: tDestination, distance: tDistance, fare: tFare, travelTime: tTravelTime, availableLuggae: cALuggage, selectedCarIndex: cselectedCarIndex )
+        self.init(id: tId, driver: tDriver, originLocation: tOriginLocationObj, destLocation: tDestLocationObj, car: tCar, fare: tFare, availableSeats: tASeats, availableLuggage: tALuggage, riderIds: tRiderIds)
     }
 
     func toDict() -> [String : Any] {
-        return [Trip.fUser : self.user,
+        return [
+                Trip.fDriverUserId : self.driverUserId,
+                Trip.fDriverName : self.driverName,
+                Trip.fDriverPhoto : self.driverPhoto,
+                Trip.fRiderIds : self.riderIds,
                 Trip.forigin : self.origin,
                 Trip.fdestination : self.destination,
-                Trip.fdistance : self.distance,
+                Trip.foriginGeoCord : self.originGeoCord,
+                Trip.fdestinationGeoCord : self.destinationGeoCord,
+                Trip.fCar : self.car.toDict(),
+                Trip.fAvailableLuggage : self.availableLuggage,
                 Trip.fAvailableSeats : self.availableSeats,
                 Trip.ffare : self.fare,
-                Trip.ftravelTime : self.travelTime,
-                Trip.fAvailableLuggage : self.availableLuggage,
-                Trip.fselectedCarIndex : self.selectedCarIndex]
+        ]
+    }
+    
+    public static func copyWith(id: String? = nil, driver: RideShareUser, originLocation: RideLocation, destLocation: RideLocation, car:Car, fare: Double, availableSeats: Int, availableLuggage: Int, riderIds: [String]) -> Trip{
+        return Trip(id: id, driver: driver, originLocation: originLocation, destLocation: destLocation, car: car, fare: fare, availableSeats: availableSeats, availableLuggage: availableLuggage, riderIds: riderIds)
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AccountView: View {
+    @Binding var rootScreen:RootView
     @EnvironmentObject var fireAuthHelper : FireAuthHelper
     @EnvironmentObject var fireDBHelper : FireDBHelper
     @State private var profileSelection : Int? = nil
@@ -47,14 +48,20 @@ struct AccountView: View {
                 
             })
             
+            CustomButton(title: "Sign Out 🛑", action: {
+                fireAuthHelper.signOut()
+                self.rootScreen = .SignIn
+                
+            }, color: Color.red)
+            
+            CustomButton(title: "Delete Profile & Account ❌", action: {
+                
+            }, color: Color.red)
+            
             
             Spacer()
         }
     }
 }
 
-struct AccountView_Previews: PreviewProvider {
-    static var previews: some View {
-        AccountView()
-    }
-}
+
