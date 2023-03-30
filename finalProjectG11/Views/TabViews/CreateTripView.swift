@@ -103,6 +103,7 @@ struct CreateTripView: View {
                 
                 Spacer()
                 Button(action:{
+                    print("hii")
                     if validation(){
                     let originLoc = RideLocation(cityName: self.originText, latitude: self.originGeoCords[0], longitude: self.originGeoCords[1])
                                         let destiLoc = RideLocation(cityName: destinationText, latitude: destinationGeoCords[0], longitude: self.destinationGeoCords[1])
@@ -127,6 +128,8 @@ struct CreateTripView: View {
                         self.originText = ""
                         self.destinationText = ""
                         self.fareText = ""
+                        self.destinationGeoCords = []
+                        self.originGeoCords = []
                     }
 
                 }){
@@ -135,7 +138,7 @@ struct CreateTripView: View {
                         .foregroundColor(.white)
                         .bold()
                         .padding()
-                        .background(Color.blue)
+                        .background(self.carsList.isEmpty ? Color.gray : Color.blue)
                 }.disabled(self.carsList.isEmpty)
             }
             .padding()

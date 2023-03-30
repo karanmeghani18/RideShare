@@ -49,6 +49,21 @@ class FireDBHelper : ObservableObject{
         
     }
     
+    func updateName(name:String) {
+        self.store
+            .collection(COLLECTION_USERS)
+            .document(loggedInUserEmail)
+            .updateData([
+                RideShareUser.fUserName : name
+            ]){ updated in
+                if(updated == nil){
+                    print(#function, "User inserted successfully!")
+                }else{
+                    print(#function, "Unable to insert user \(updated.debugDescription)")
+                }
+            }
+    }
+    
     func createBooking(trip:Trip, requestedLuggage: Int) {
         loggedInUserEmail = currentUser.email
         

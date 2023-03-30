@@ -16,6 +16,10 @@ struct ProfileView: View {
     @State private var carsList:[Car] = []
     @State private var addCarSelection:Int? = nil
     
+    @State private var alertTitle:String = ""
+    @State private var alertComment:String = ""
+    @State private var showAlert:Bool = false
+    
     var body: some View {
         NavigationLink(destination: AddCarView().environmentObject(fireDBHelper), tag: 1, selection: self.$addCarSelection ){}.hidden()
         NavigationView(){
@@ -64,11 +68,9 @@ struct ProfileView: View {
                 })
                 
                 CustomButton(title: "Update Name", action: {
-                    
-                })
-                
-                CustomButton(title: "Update Profile Photo", action: {
-                    
+                    self.fireDBHelper.updateName(name: userName)
+                    alertTitle = "Updated!"
+                    alertComment = "\(userName) has been updated!"
                 })
                 
                 Spacer()
@@ -80,7 +82,9 @@ struct ProfileView: View {
                 }
             })
             .padding()
-            
+            .alert(isPresented: self.$showAlert){
+                Alert(title: Text(self.alertTitle), message: Text(self.alertComment), dismissButton: .default(Text("Okay")))
+            }
         }
         .navigationTitle("Profile")
     }

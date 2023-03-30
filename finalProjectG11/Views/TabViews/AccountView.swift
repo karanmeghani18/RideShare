@@ -53,17 +53,9 @@ struct AccountView: View {
                 self.profileSelection = 3
             })
             
-            CustomButton(title: "Trips Earnings", action: {
-                
-            })
-            
             CustomButton(title: "Sign Out 🛑", action: {
                 fireAuthHelper.signOut()
                 self.rootScreen = .SignIn
-                
-            }, color: Color.red)
-            
-            CustomButton(title: "Delete Profile & Account ❌", action: {
                 
             }, color: Color.red)
             

@@ -19,12 +19,12 @@ struct RideShareUser : Codable, Hashable {
     
     //pre-defined members
     private static let fUserId:String = "uId"
-    private static let fUserName:String = "uUserName"
+     static let fUserName:String = "uUserName"
     private static let fProfilePhotoUrl:String = "uProfilePhotoUrl"
     private static let fEmail:String = "uEmail"
     private static let fCar:String = "uCar"
-     static let fTrips:String = "uTrips"
-     static let fRides:String = "uRides"
+    static let fTrips:String = "uTrips"
+    static let fRides:String = "uRides"
     
     init(){
 

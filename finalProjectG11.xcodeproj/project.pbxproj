@@ -191,19 +191,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8F8648E229D27DD400480C5A /* ProfileViews */ = {
+		8F8648E229D27DD400480C5A /* CarViews */ = {
 			isa = PBXGroup;
 			children = (
 				8FC6D76D29D241CB00E5D6C6 /* ProfileView.swift */,
 				8F8648E329D27DEF00480C5A /* AddCarView.swift */,
 			);
-			path = ProfileViews;
+			path = CarViews;
 			sourceTree = "<group>";
 		};
 		8FC6D76C29D241B400E5D6C6 /* AccountOptinsView */ = {
 			isa = PBXGroup;
 			children = (
-				8F8648E229D27DD400480C5A /* ProfileViews */,
+				8F8648E229D27DD400480C5A /* CarViews */,
 			);
 			path = AccountOptinsView;
 			sourceTree = "<group>";
