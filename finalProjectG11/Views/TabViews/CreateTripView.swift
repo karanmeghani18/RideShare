@@ -145,6 +145,9 @@ struct CreateTripView: View {
             }
             .onAppear(perform: {
                 self.carsList = self.fireDbHelper.currentUser.car
+                if(!carsList.isEmpty){
+                    self.selectedCar = carsList[0]
+                }
             })
         }
     }

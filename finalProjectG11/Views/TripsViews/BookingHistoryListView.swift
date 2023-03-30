@@ -12,8 +12,10 @@ struct BookingHistoryListView: View {
     @State private var bookingHistory:[Trip] = []
     @State private var selectedTrip:Trip = Trip()
     
+    @EnvironmentObject private var fireDBHelper: FireDBHelper
+    
     var body: some View {
-        NavigationLink(destination: TripDetailView(trip: selectedTrip), tag: 1, selection: self.$tripDetailSelection ){}.hidden()
+        NavigationLink(destination: TripDetailView(trip: selectedTrip).environmentObject(fireDBHelper), tag: 1, selection: self.$tripDetailSelection ){}.hidden()
         NavigationView{
             VStack{
                 List{
@@ -30,16 +32,11 @@ struct BookingHistoryListView: View {
                 Spacer()
             }
             .onAppear(perform: {
+                self.fireDBHelper.getUserRides(completion: { ridesList in
+                    print("rids r", ridesList)
+                    self.bookingHistory = ridesList
+                })
                 
-                let carForTrip:Car = Car(id: UUID().uuidString, modelName: "Model X", companyName: "Tesla", yearOfManufacture: 2019, totalSeats: 6, maxLuggage: 3)
-                
-                let user:RideShareUser = RideShareUser(userName: "Om C.", profilePhotoUrl: "ProfilePhoto", email: "omchevli@gmail.com", car: [carForTrip])
-                
-                self.bookingHistory = [
-                   
-
-                    
-                ]
             })
         }
         .navigationTitle("Trips")

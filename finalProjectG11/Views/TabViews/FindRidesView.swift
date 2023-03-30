@@ -121,6 +121,7 @@ struct FindRidesView: View {
             showAlert = true
         }
     }
+    
     func validation() -> Bool{
         if self.originText.isEmpty{
             alertTitle = "Origin Location"

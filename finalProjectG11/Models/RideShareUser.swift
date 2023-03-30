@@ -14,6 +14,8 @@ struct RideShareUser : Codable, Hashable {
     var profilePhotoUrl : String = ""
     var email : String = ""
     var car: [Car] = []
+    var trips: [String] = []
+    var rides: [String] = []
     
     //pre-defined members
     private static let fUserId:String = "uId"
@@ -21,17 +23,21 @@ struct RideShareUser : Codable, Hashable {
     private static let fProfilePhotoUrl:String = "uProfilePhotoUrl"
     private static let fEmail:String = "uEmail"
     private static let fCar:String = "uCar"
+     static let fTrips:String = "uTrips"
+     static let fRides:String = "uRides"
     
     init(){
 
     }
     
-    init(id: String? = nil, userName: String, profilePhotoUrl: String, email: String = "", car: [Car] = []) {
+    init(id: String? = nil, userName: String, profilePhotoUrl: String, email: String = "", car: [Car] = [], trips: [String] = [], rides: [String] = []) {
         self.id = id
         self.userName = userName
         self.profilePhotoUrl = profilePhotoUrl
         self.email = email
         self.car = car
+        self.trips = trips
+        self.rides = rides
     }
     
     init?(dictionary : [AnyHashable : Any]){
@@ -56,8 +62,18 @@ struct RideShareUser : Codable, Hashable {
             print(#function, "Unable to read Email from the object")
             return nil
         }
+        
+        guard let utrips = dictionary[RideShareUser.fTrips] as? [String] else{
+            print(#function, "Unable to read trips id in the object")
+            return nil
+        }
+        
+        guard let urides = dictionary[RideShareUser.fRides] as? [String] else{
+            print(#function, "Unable to read rides id in the object")
+            return nil
+        }
 
-        self.init(id: tid, userName: name, profilePhotoUrl: photoUrl, email: uemail)
+        self.init(id: tid, userName: name, profilePhotoUrl: photoUrl, email: uemail, trips: utrips, rides: urides)
     }
     
     func toDict() -> [String : Any] {
@@ -65,7 +81,9 @@ struct RideShareUser : Codable, Hashable {
             RideShareUser.fUserId : self.id ?? "",
             RideShareUser.fUserName : self.userName,
             RideShareUser.fProfilePhotoUrl: self.profilePhotoUrl,
-            RideShareUser.fEmail : self.email
+            RideShareUser.fEmail : self.email,
+            RideShareUser.fTrips : self.trips,
+            RideShareUser.fRides : self.rides,
         ]
     }
     

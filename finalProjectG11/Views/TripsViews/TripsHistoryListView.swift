@@ -11,9 +11,10 @@ struct TripsHistoryListView: View {
     @State private var tripDetailSelection: Int? = nil
     @State private var tripsHistoryList:[Trip] = []
     @State private var selectedTrip:Trip = Trip()
+    @EnvironmentObject private var fireDBHelper: FireDBHelper
     
     var body: some View {
-        NavigationLink(destination: TripDetailView(trip: selectedTrip), tag: 1, selection: self.$tripDetailSelection ){}.hidden()
+        NavigationLink(destination: TripDetailView(trip: selectedTrip).environmentObject(fireDBHelper), tag: 1, selection: self.$tripDetailSelection ){}.hidden()
         NavigationView{
             VStack{
                 List{
@@ -21,7 +22,7 @@ struct TripsHistoryListView: View {
                         TripItemView(trip: trip.wrappedValue,
                                      onTap: {
                             navigateToDetail(trip: trip.wrappedValue)
-                        })
+                        }).environmentObject(fireDBHelper)
                     }
                     
                 }
@@ -30,16 +31,10 @@ struct TripsHistoryListView: View {
                 Spacer()
             }
             .onAppear(perform: {
-                
-                let carForTrip:Car = Car(id: UUID().uuidString, modelName: "Model X", companyName: "Tesla", yearOfManufacture: 2019, totalSeats: 6, maxLuggage: 3)
-                
-                let user:RideShareUser = RideShareUser(userName: "Om C.", profilePhotoUrl: "ProfilePhoto", email: "omchevli@gmail.com", car: [carForTrip])
-                
-                self.tripsHistoryList = [
-                  
-
-                    
-                ]
+                self.fireDBHelper.getUserTrips(completion: { tripsReceived in
+                    print("trips r", tripsReceived)
+                    self.tripsHistoryList = tripsReceived
+                })
             })
         }
         .navigationTitle("Trips")

@@ -41,18 +41,20 @@ struct Trip : Codable, Hashable, Equatable, Identifiable{
     }
     
     //pre-defined members
-    private static var fDriverUserId = "tDriverUserId"
+    static var fDriverUserId = "tDriverUserId"
     private static var fDriverName = "tDriverName"
     private static var fDriverPhoto = "tDriverPhoto"
-    private static var fRiderIds = "tRiderIds"
+    private static var fDriverEmail:String = "tDriverEmail"
+    static var fRiderIds = "tRiderIds"
     static var forigin:String = "tOriginName"
     static var fdestination:String = "tDestinationName"
     private static let foriginGeoCord:String = "tOriginGeoCord"
     private static let fdestinationGeoCord:String = "tDestGeoCord"
     private static let fCar:String = "fCar"
-    private static let fAvailableLuggage:String = "fAvailableLuggage"
-    private static let fAvailableSeats:String = "cAvailableSeats"
+    static let fAvailableLuggage:String = "fAvailableLuggage"
+    static let fAvailableSeats:String = "cAvailableSeats"
     private static var ffare:String = "tfare"
+    
     
     init(){}
     
@@ -86,7 +88,12 @@ struct Trip : Codable, Hashable, Equatable, Identifiable{
             return nil
         }
         
-        let tDriver:RideShareUser = RideShareUser(id: tDriverId, userName: tDriverName, profilePhotoUrl: tDriverPhoto)
+        guard let tDriverEmail = dictionary[Trip.fDriverEmail] as? String else{
+            print(#function, "Unable to driver email from the object")
+            return nil
+        }
+        
+        let tDriver:RideShareUser = RideShareUser(id: tDriverId ,userName: tDriverName ,profilePhotoUrl: tDriverPhoto, email: tDriverEmail)
         
         guard let tRiderIds = dictionary[Trip.fRiderIds] as? [String] else {
             print(#function, "Unable to read rider ids from the object")
@@ -153,6 +160,7 @@ struct Trip : Codable, Hashable, Equatable, Identifiable{
 
     func toDict() -> [String : Any] {
         return [
+                Trip.fDriverEmail:self.driver.email,
                 Trip.fDriverUserId : self.driverUserId,
                 Trip.fDriverName : self.driverName,
                 Trip.fDriverPhoto : self.driverPhoto,

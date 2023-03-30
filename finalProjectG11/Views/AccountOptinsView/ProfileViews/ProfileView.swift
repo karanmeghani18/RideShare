@@ -71,10 +71,6 @@ struct ProfileView: View {
                     
                 })
                 
-                CustomButton(title: "Logout", action: {
-                    
-                })
-                
                 Spacer()
             }.onAppear(perform:{
                 self.user = fireDBHelper.currentUser

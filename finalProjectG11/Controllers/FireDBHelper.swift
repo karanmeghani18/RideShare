@@ -49,6 +49,112 @@ class FireDBHelper : ObservableObject{
         
     }
     
+    func createBooking(trip:Trip, requestedLuggage: Int) {
+        loggedInUserEmail = currentUser.email
+        
+        //Update rider's rides
+        currentUser.rides.append(trip.id!)
+        self.store
+            .collection(COLLECTION_USERS)
+            .document(loggedInUserEmail)
+            .updateData([
+                RideShareUser.fRides : currentUser.rides
+            ])
+        
+        //Update driver's trip
+        self.store
+            .collection(COLLECTION_USERS)
+            .document(trip.driver.email)
+            .updateData([
+                RideShareUser.fTrips : FieldValue.arrayUnion([trip.id!])
+            ])
+        
+        //Update trip availabel seat
+        self.store
+            .collection(COLLECTION_TRIPS)
+            .document(trip.id!)
+            .updateData([
+                Trip.fAvailableSeats : trip.availableSeats - 1
+            ])
+        
+        //Update trip availabel luggage
+        self.store
+            .collection(COLLECTION_TRIPS)
+            .document(trip.id!)
+            .updateData([
+                Trip.fAvailableLuggage : trip.availableLuggage - requestedLuggage
+            ])
+        
+        //add rider id to trip'
+        self.store
+            .collection(COLLECTION_TRIPS)
+            .document(trip.id!)
+            .updateData([
+                Trip.fRiderIds : FieldValue.arrayUnion([currentUser.id!])
+            ])
+            
+    }
+    
+    func getUserTrips(completion: @escaping ([Trip]) -> Void) {
+        var results:[Trip] = []
+        self.store
+            .collection(COLLECTION_TRIPS)
+            .whereField(Trip.fDriverUserId, isEqualTo: self.currentUser.id!)
+            .addSnapshotListener({ (querySnapshot, error) in
+                guard let snapshot = querySnapshot else{
+                    print(#function, "Unable to retrieve data from Firestore : \(error.debugDescription)")
+                    return
+                }
+                if(snapshot.documentChanges.isEmpty){
+                    completion(results)
+                    return
+                }
+                
+                snapshot.documentChanges.forEach{ (docChange) in
+                    
+                    let receivedTrip : Trip = Trip(dictionary: docChange.document.data(), receivedId: docChange.document.documentID) ?? Trip()
+                    print(#function, docChange.document.data())
+                    results.append(receivedTrip)
+                    
+                    if(snapshot.documentChanges.last == docChange){
+                        completion(results)
+                    }
+                }
+                
+            })
+
+    }
+    
+    func getUserRides(completion: @escaping ([Trip]) -> Void) {
+        var results:[Trip] = []
+        self.store
+            .collection(COLLECTION_TRIPS)
+            .whereField(Trip.fRiderIds, arrayContains: self.currentUser.id!)
+            .addSnapshotListener({ (querySnapshot, error) in
+                guard let snapshot = querySnapshot else{
+                    print(#function, "Unable to retrieve data from Firestore : \(error.debugDescription)")
+                    return
+                }
+                if(snapshot.documentChanges.isEmpty){
+                    completion(results)
+                    return
+                }
+                
+                snapshot.documentChanges.forEach{ (docChange) in
+                    
+                    let receivedTrip : Trip = Trip(dictionary: docChange.document.data(), receivedId: docChange.document.documentID) ?? Trip()
+                    print(#function, docChange.document.data())
+                    results.append(receivedTrip)
+                    
+                    if(snapshot.documentChanges.last == docChange){
+                        completion(results)
+                    }
+                }
+                
+            })
+
+    }
+    
     func findTrips(origin: String, destination:String, completion: @escaping ([Trip]) -> Void) {
         var results:[Trip] = []
         self.store
@@ -128,6 +234,7 @@ class FireDBHelper : ObservableObject{
             print(#function, "Logged in user not identified")
         }else{
             let updatedTrip = Trip.copyWith(driver: currentUser, originLocation: trip.originLocation, destLocation: trip.destLocation, car: trip.car, fare: trip.fare, availableSeats: trip.availableSeats, availableLuggage: trip.availableLuggage, riderIds: trip.riderIds)
+            print(#function, updatedTrip)
             self.store
                 .collection(COLLECTION_TRIPS)
                 .addDocument(data: updatedTrip.toDict())
