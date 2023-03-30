@@ -10,10 +10,10 @@ import SwiftUI
 struct CreateTripView: View {
     @EnvironmentObject private var fireDbHelper: FireDBHelper
     @EnvironmentObject private var locationHelper:LocationHelper
-    
+
     @State private var originText:String = ""
     @State private var destinationText:String = ""
-    
+
     @State private var fareText:String = ""
     @State private var carSelection:Int = 0
     @State private var carsList:[Car] = []
@@ -24,7 +24,7 @@ struct CreateTripView: View {
     @State private var originGeoCords:[Double] = []
     @State private var destinationGeoCords:[Double] = []
     @State private var showAlert:Bool = false
-    
+
     var body: some View {
         NavigationView{
             VStack{
@@ -65,8 +65,8 @@ struct CreateTripView: View {
                         }
                     }
                 }
-                
-                    
+
+
                 Section("Select car for trip"){
                     if(carsList.isEmpty){
                         Text("No Cars Found. Please add car from profile.")
@@ -82,12 +82,12 @@ struct CreateTripView: View {
                             self.selectedCar = carsList[newValue]
                         })
                     }
-                   
+
                 }
-            
-                
-                
-                
+
+
+
+
                 TextField("Expected Fare", text: self.$fareText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .disableAutocorrection(true)
@@ -103,23 +103,32 @@ struct CreateTripView: View {
                 
                 Spacer()
                 Button(action:{
+                    if validation(){
                     let originLoc = RideLocation(cityName: self.originText, latitude: self.originGeoCords[0], longitude: self.originGeoCords[1])
-                    let destiLoc = RideLocation(cityName: destinationText, latitude: destinationGeoCords[0], longitude: self.destinationGeoCords[1])
-                    let fareOpted = Double(self.fareText) ?? 0.0
-                    let seats = selectedCar.totalSeats
-                    let luggage = selectedCar.maxLuggage
-                    
-                    let newTrip:Trip = Trip(
-                        driver: RideShareUser(),
-                        originLocation: originLoc,
-                        destLocation: destiLoc,
-                        car: selectedCar,
-                        fare: fareOpted,
-                        availableSeats: seats,
-                        availableLuggage: luggage,
-                        riderIds: [])
-                    
-                    fireDbHelper.addTrip(trip: newTrip)
+                                        let destiLoc = RideLocation(cityName: destinationText, latitude: destinationGeoCords[0], longitude: self.destinationGeoCords[1])
+                                        let fareOpted = Double(self.fareText) ?? 0.0
+                                        let seats = selectedCar.totalSeats
+                                        let luggage = selectedCar.maxLuggage
+
+                        let newTrip:Trip = Trip(
+                            driver: RideShareUser(),
+                            originLocation: originLoc,
+                            destLocation: destiLoc,
+                            car: selectedCar,
+                            fare: fareOpted,
+                            availableSeats: seats,
+                            availableLuggage: luggage,
+                            riderIds: [])
+
+                        fireDbHelper.addTrip(trip: newTrip)
+                        self.alertTitle = "Trip Created"
+                        self.alertMessage = "Your trip has been successfully created."
+                        showAlert = true
+                        self.originText = ""
+                        self.destinationText = ""
+                        self.fareText = ""
+                    }
+
                 }){
                     Text("Create")
                         .font(.title2)
@@ -139,7 +148,29 @@ struct CreateTripView: View {
             })
         }
     }
-    
+    func validation() -> Bool{
+        if self.originText.isEmpty{
+            alertTitle = "Origin Location"
+            alertMessage = "Origin cannot be empty"
+            showAlert = true
+            return false
+
+        }else if destinationText.isEmpty{
+            alertTitle = "Destination Location"
+            alertMessage = "Destination cannot be empty"
+            showAlert = true
+            return false
+
+        }else if fareText.isEmpty{
+            alertTitle = "Expected Fare"
+            alertMessage = "Expected Fare cannot be empty"
+            showAlert = true
+            return false
+
+        }
+            return true
+    }
+
     func handleLocationAlert(location: LocationType) {
         locationHelper.fetchLocation(locationName: location == LocationType.Destination ? self.destinationText : self.originText){
             foundLocation in
@@ -158,7 +189,7 @@ struct CreateTripView: View {
                 alertTitle = "\(location) Location Not Found!"
                 alertComment = "Please enter proper \(location) location"
             }
-            
+
             showAlert = true
         }
     }

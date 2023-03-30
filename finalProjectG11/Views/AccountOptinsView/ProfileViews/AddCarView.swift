@@ -16,7 +16,10 @@ struct AddCarView: View {
     @State private var luggage:Int = 2
     @State private var seatsSelection:Int = 0
     @State private var seats:Int = 3
-    
+    @State private var showAlert = false
+    @State private var alertTitle : String = ""
+    @State private var alertMessage : String = ""
+
     @EnvironmentObject private var fireDBHelper:FireDBHelper
     
     var body: some View {
@@ -63,12 +66,18 @@ struct AddCarView: View {
                 }
                 Section{
                     Button(action: {
-                        addCar(car: Car(
-                            modelName: self.modelName,
-                            companyName: self.companyName,
-                            yearOfManufacture: yom,
-                            totalSeats: seats,
-                            maxLuggage: luggage))
+                        if validation(){
+                            addCar(car: Car(
+                                modelName: self.modelName,
+                                companyName: self.companyName,
+                                yearOfManufacture: yom,
+                                totalSeats: seats,
+                                maxLuggage: luggage))
+                            alertTitle = "Succesfull!"
+                            alertMessage = "Car added succesfully"
+                            showAlert = true
+                        }
+                        
                     }){
                         Text("Add Car")
                     }
@@ -76,12 +85,34 @@ struct AddCarView: View {
             }
             .navigationTitle("Add Car")
         }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(alertTitle),
+                message: Text(alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         
     }
     
     func addCar(car:Car) {
         fireDBHelper.addCar(car: car)
     }
+    func validation()-> Bool{
+        if modelName.isEmpty{
+            alertTitle = "Model name"
+            alertMessage = "Model name cannot be empty"
+            showAlert = true
+            return false
+        }else if companyName.isEmpty{
+            alertTitle = "Company name"
+            alertMessage = "Company name cannot be empty"
+            showAlert = true
+            return false
+        }
+        return true
+    }
+
 }
 
 struct AddCarView_Previews: PreviewProvider {
