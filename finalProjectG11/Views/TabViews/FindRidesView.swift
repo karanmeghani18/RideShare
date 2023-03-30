@@ -11,6 +11,10 @@ struct FindRidesView: View {
     @State private var originText:String = ""
     @State private var destinationText:String = ""
     @State private var tripsListSelection : Int? = nil
+    @State private var showAlert = false
+    @State private var alertTitle : String = ""
+    @State private var alertMessage : String = ""
+    
     @EnvironmentObject private var locationHelper:LocationHelper
     
     
@@ -33,7 +37,11 @@ struct FindRidesView: View {
                     .disableAutocorrection(true)
                 Spacer()
                 Button(action:{
-                    self.tripsListSelection = 1
+                    if validation(){
+                        //actions 
+                        self.tripsListSelection = 1
+                    }
+                    
                 }){
                     Text("Search")
                         .font(.title2)
@@ -44,9 +52,31 @@ struct FindRidesView: View {
                 }
             }.padding()
                 .navigationTitle("Find A Ride!")
+        }            .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(alertTitle),
+                message: Text(alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
         }
        
         
+    }
+    func validation() -> Bool{
+        if self.originText.isEmpty{
+            alertTitle = "Origin Location"
+            alertMessage = "Origin cannot be empty"
+            showAlert = true
+            return false
+            
+        }else if destinationText.isEmpty{
+            alertTitle = "Destination Location"
+            alertMessage = "Destination cannot be empty"
+            showAlert = true
+            return false
+            
+        }
+            return true
     }
     
 }

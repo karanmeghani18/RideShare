@@ -16,6 +16,11 @@ struct CreateTripView: View {
     @State private var carSelection:Int = 0
     @State private var carsList:[Car] = []
     @State private var selectedCar:Car = Car()
+    @State private var showAlert = false
+    @State private var alertTitle : String = ""
+    @State private var alertMessage : String = ""
+
+
     
     var body: some View {
         NavigationView{
@@ -61,6 +66,15 @@ struct CreateTripView: View {
                 Spacer()
                 Button(action:{
                     
+                    if validation(){
+                        self.alertTitle = "Trip Created"
+                        self.alertMessage = "Your trip has been successfully created."
+                        showAlert = true
+                        self.originText = ""
+                        self.destinationText = ""
+                        self.fareText = ""
+                    }
+
                 }){
                     Text("Create")
                         .font(.title2)
@@ -74,7 +88,36 @@ struct CreateTripView: View {
             .onAppear(perform: {
                 self.carsList = self.fireDbHelper.currentUser.car
             })
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text(alertTitle),
+                    message: Text(alertMessage),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
         }
+    }
+    func validation() -> Bool{
+        if self.originText.isEmpty{
+            alertTitle = "Origin Location"
+            alertMessage = "Origin cannot be empty"
+            showAlert = true
+            return false
+            
+        }else if destinationText.isEmpty{
+            alertTitle = "Destination Location"
+            alertMessage = "Destination cannot be empty"
+            showAlert = true
+            return false
+            
+        }else if fareText.isEmpty{
+            alertTitle = "Expected Fare"
+            alertMessage = "Expected Fare cannot be empty"
+            showAlert = true
+            return false
+            
+        }
+            return true
     }
 }
 
